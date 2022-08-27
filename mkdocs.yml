@@ -1,0 +1,44 @@
+site_name: 重庆大学操作系统实验文档
+copyright: 'Copyright &copy; 2022 College of Computer Science, Chongqing University.'
+theme:
+  name: material
+  features:
+    - navigation.tabs
+nav:
+  - 主页: index.md
+plugins:
+  - search
+  - git-revision-date-localized:
+      fallback_to_build_date: true
+      locale: zh
+  - git-authors:
+      show_contribution: true
+      show_line_count: true
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: true
+  - footnotes
+  - def_list
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+repo_name: 'osexp-docs-cqu'
+repo_url: 'https://github.com/cyyself/osexp-docs-cqu'
