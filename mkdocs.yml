@@ -6,6 +6,8 @@ theme:
     - navigation.tabs
 nav:
   - 主页: index.md
+  - 实验一-裸机程序:
+    - 了解裸机程序: lab1/intro.md
 plugins:
   - search
   - git-revision-date-localized:
