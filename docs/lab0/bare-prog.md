@@ -105,9 +105,9 @@ Idx Name          Size      VMA               LMA               File off  Algn
 
 至此，我们开始真正编写一个裸机程序，大家在搭建好的环境中新建文件夹，一步步开始吧！
 
-### 初始化的汇编代码（start.S）
+### 初始化的汇编代码
 
-```asm title="start.s" linenums="1"
+```asm title="start.S" linenums="1"
 .extern main
 .text
 .globl _start
@@ -141,7 +141,7 @@ bootstacktop:
 
 这里程序主要完成了对CSR的DMWIN的设置，并修改CSR_CRMD开启虚拟地址翻译模式，然后从栈地址直接进入到cmain函数。而cmain函数来源于外部的extern，我们接着写cmain对应的代码。
 
-### 编写简单串口输出C程序（main.c）
+### 编写简单串口输出C程序
 
 串口是一种通信方式。在LoongArch32的QEMU中，有一个ns16550a规格的串口，位于物理地址0x1fe001e0。
 
@@ -226,8 +226,10 @@ clean:
 
 ### 编译运行
 
+在放置了`start.S`、`main.c`、`lab0.ld`、`Makefile`的文件夹下执行`make qemu`：
+
 ```shell hl_lines="6"
-➜  lab0 make qemu 
+➜  make qemu 
 qemu-system-loongarch32 -M ls3a5k32 -m 32M -kernel start.elf -nographic
 loongson32_init: num_nodes 1
 loongson32_init: node 0 mem 0x2000000
