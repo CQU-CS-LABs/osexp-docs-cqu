@@ -7,7 +7,10 @@ theme:
 nav:
   - 主页: index.md
   - 实验零-裸机程序:
-    - 了解裸机程序: lab0/intro.md
+    - 背景介绍: lab0/intro.md
+    - 搭建实验环境: lab0/setup.md
+    - 编写裸机程序: lab0/bare-prog.md
+    - 实验任务: lab0/task.md
 plugins:
   - search
   - git-revision-date-localized:
