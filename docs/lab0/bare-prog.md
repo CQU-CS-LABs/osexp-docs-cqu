@@ -169,7 +169,7 @@ void print_s(const char *c) {
 }
 
 void main() {
-    print_s("\nHere is my first baremental program on LoongArch32!\n\n");
+    print_s("\nHere is my first bare-metal machine program on LoongArch32!\n\n");
 }
 ```
 
@@ -232,12 +232,12 @@ qemu-system-loongarch32 -M ls3a5k32 -m 32M -kernel start.elf -nographic
 loongson32_init: num_nodes 1
 loongson32_init: node 0 mem 0x2000000
 
-Here is my first baremental program on LoongArch32!
+Here is my first bare-metal machine program on LoongArch32!
 
 
 ```
 
-看到"Here is my first baremental program on LoongArch32!"表示我们的裸机程序运行成功！
+看到"Here is my first bare-metal machine program on LoongArch32!"表示我们的裸机程序运行成功！
 
 ### 退出QEMU
 
