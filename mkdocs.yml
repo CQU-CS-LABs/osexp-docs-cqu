@@ -21,9 +21,6 @@ plugins:
       show_line_count: true
 markdown_extensions:
   - admonition
-  - codehilite:
-      guess_lang: false
-      linenums: true
   - footnotes
   - def_list
   - meta
@@ -37,7 +34,10 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.emoji:
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
   - pymdownx.inlinehilite
+  - pymdownx.snippets
   - pymdownx.keys
   - pymdownx.magiclink
   - pymdownx.mark

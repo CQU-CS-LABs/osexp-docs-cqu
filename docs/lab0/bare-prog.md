@@ -25,7 +25,7 @@
 
 我们可以尝试运行以下实验，编写如下C语言程序：
 
-```c
+```c title="hello.c" linenums="1"
 #include <stdio.h>
 int main() {
 	printf("Hello World\n");
@@ -107,7 +107,7 @@ Idx Name          Size      VMA               LMA               File off  Algn
 
 ### 初始化的汇编代码（start.S）
 
-```asm
+```asm title="start.s" linenums="1"
 .extern main
 .text
 .globl _start
@@ -147,7 +147,7 @@ bootstacktop:
 
 该串口通过MMIO的方式访问，我们需要通过编写ns16550a对应的驱动代码完成串口的打印，这一部分感兴趣的同学可以自行上网搜索，助教已经给出一个只有输出功能的驱动范例，如下：
 
-```c
+```c title="main.c" linenums="1"
 #define UART_BASE 0x9fe001e0
 #define UART_RX     0   /* In:  Receive buffer */
 #define UART_TX     0   /* Out: Transmit buffer */
@@ -181,11 +181,11 @@ void main() {
 
     如果使用Cached地址访问串口，例如对应的DMWIN0下的0xbfe001e0，尽管在QEMU中不会有任何错误，但在实际有Cache的CPU硬件上会导致串口访问失去原子性，导致无法得到串口输出。
 
-### 编写链接脚本 （lab0.ld）
+### 编写链接脚本
 
 这里我们的链接脚本需要做的事情就是指定一个起始地址，并删去程序中不需要的存储区段，因此最终产生链接脚本如下：
 
-```lds
+```lds title="lab0.ld" linenums="1" hl_lines="3"
 SECTIONS
 {
     . = 0xa0000000;
@@ -201,7 +201,7 @@ SECTIONS
 
 ### 编写Makefile
 
-```makefile
+```makefile title="Makefile" linenums="1"
 TOOL	:=	loongarch32r-linux-gnusf-
 CC		:=	$(TOOL)gcc
 OBJCOPY	:=	$(TOOL)objcopy
@@ -226,7 +226,7 @@ clean:
 
 ### 编译运行
 
-```shell
+```shell hl_lines="6"
 ➜  lab0 make qemu 
 qemu-system-loongarch32 -M ls3a5k32 -m 32M -kernel start.elf -nographic
 loongson32_init: num_nodes 1
