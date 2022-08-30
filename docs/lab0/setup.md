@@ -10,7 +10,7 @@
 
 ### 对于使用的电脑非x86-64架构的同学
 
-如果同学们使用非x86-64架构的计算机进行实验，例如使用ARM架构的Apple Silicon的Mac甚至是树莓派，可以使用虚拟机安装一个Linux发行版（推荐Debian），然后执行以下命令安装qemu-user模拟x86-64环境，就可以在Linux中运行x86架构的二进制程序了：
+如果同学们使用非x86-64架构的计算机进行实验，例如使用ARM架构的Apple Silicon的Mac甚至是树莓派，可以使用虚拟机安装一个自己指令集架构的Linux发行版（对于ARM推荐Debian，作为Ubuntu的上游软件支持较丰富），然后执行以下命令安装qemu-user模拟x86-64环境，就可以在Linux中运行x86架构的二进制程序了：
 
 ```shell
 sudo apt install qemu-user qemu-user-static gcc-x86-64-linux-gnu binutils-x86-64-linux-gnu binutils-x86-64-linux-gnu-dbg build-essential
@@ -43,6 +43,11 @@ newgrp docker
 
 ```shell
 docker pull chenyy/la32r-env
+```
+
+2. 基于`chenyy/la32r-env`创建`la32r-docker`容器
+
+```shell
 docker run -dit \
     --name la32r-docker \
     --user=$(id -u $USER):$(id -g $USER) \
@@ -77,6 +82,6 @@ docker exec -it la32r-docker /bin/zsh
 
 同学们可以在VSCode的插件中搜索Docker，并通过该插件连接到容器中完成操作。
 
-这样我们可以直接在VSCode的插件中找到对应Docker并点击attach Shell完成操作。方便我们后续在Host端的VSCode完成代码编写，并在Docker中使用对应环境完成编译与调试。
+这样我们可以直接在VSCode的插件中找到对应Docker，可以进行Attach Shell或Attch VSCode。方便我们后续在Host端的VSCode完成代码编写，并在Docker中使用对应环境完成编译与调试。
 
 ![../img/vscode-docker.png](../img/vscode-docker.png)
