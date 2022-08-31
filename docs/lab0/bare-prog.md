@@ -139,7 +139,7 @@ bootstacktop:
 
 我们将这个文件保存为`start.S`。
 
-这里程序主要完成了对CSR的DMWIN的设置，并修改CSR_CRMD开启虚拟地址翻译模式，然后从栈地址直接进入到cmain函数。而cmain函数来源于外部的extern，我们接着写cmain对应的代码。
+这里程序主要完成了对CSR的DMWIN的设置，并修改CSR_CRMD开启虚拟地址翻译模式，然后从栈地址直接进入到main函数。而main函数来源于外部的extern，我们接着写main对应的代码。
 
 ### 编写简单串口输出C程序
 
@@ -222,7 +222,7 @@ clean:
 
 然后保存为`Makefile`。
 
-关于Makefile的内容大家可以上网寻找相关资料。这里编译时添加参数`-nostdlib -static -fno-builtin-printf`是为了防止stdlib编译到我们的程序中，毕竟这是一个裸机程序。
+关于Makefile的内容大家可以上网寻找相关资料。这里编译时添加参数`-nostdlib`是为了防止stdlib编译到我们的程序中，毕竟这是一个裸机程序。
 
 ### 编译运行
 
