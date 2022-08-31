@@ -244,3 +244,11 @@ Here is my first bare-metal machine program on LoongArch32!
 ### 退出QEMU
 
 在nographic模式下，可以按 ++ctrl+a++ 一次，然后按 ++x++ 退出。
+
+!!! note
+
+    小思考：
+
+    1. 为什么在start.S的最后写了个死循环，如果不写会有什么坏处？
+
+    2. 在QEMU模拟器中运行裸机程序有什么办法避免CPU满载？（可以阅读实验一的代码找到答案。）
