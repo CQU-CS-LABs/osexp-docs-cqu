@@ -92,7 +92,7 @@ Idx Name          Size      VMA               LMA               File off  Algn
     
     2. 我们写C语言程序时开的局部变量不赋初始值为什么经常会得到一个随机数？是否与前面提到操作系统给用户进程分配虚拟页面时会进行清零的结论相悖？
     
-    3. Linux NOMMU为什么只在部分指令集架构存在（如RISC-V）？这些指令集提供了什么机制确保了NOMMU模式的进程隔离问题？
+    3. Linux NOMMU为什么只在部分指令集架构存在？部分存在NOMMU的指令集（如RISC-V）提供了什么隔离机制确保一个进程无法修改其他进程的数据？
 
     4. 为什么我们在裸机程序中可以暂时不考虑malloc（new）这种堆内存分配？
 
@@ -219,6 +219,10 @@ qemu: start.elf
 clean:
 	rm start.elf
 ```
+
+!!! warning
+
+    Makefile中命令所在的行必须以制表符（"\t"）开头，如果直接复制为空格需要手动替换为制表符，否则Make时会出现"missing separator."错误。
 
 然后保存为`Makefile`。
 
