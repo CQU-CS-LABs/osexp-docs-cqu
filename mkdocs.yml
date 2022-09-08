@@ -11,6 +11,12 @@ nav:
     - 搭建实验环境: lab0/setup.md
     - 编写裸机程序: lab0/bare-prog.md
     - 实验任务: lab0/task.md
+  - 实验三-进程管理:
+    - 背景介绍: lab3/intro.md
+    - 实验目的: lab3/goal.md
+    - 实验内容: lab3/task.md
+    - 编译方法: lab3/method.md
+    - 实验提交要求: lab3/requirements.md
 plugins:
   - search
   - git-revision-date-localized:
