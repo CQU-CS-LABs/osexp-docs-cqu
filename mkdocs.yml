@@ -11,6 +11,16 @@ nav:
     - 搭建实验环境: lab0/setup.md
     - 编写裸机程序: lab0/bare-prog.md
     - 实验任务: lab0/task.md
+  - 实验一-异常与中断:
+    - 背景介绍: lab1/intro.md
+    - 代码讲解: lab1/code.md
+    - 实验步骤: lab1/step.md
+    - 实验任务: lab1/task.md
+  - 实验二-内存管理:
+    - 背景介绍: lab2/intro.md
+    - 代码讲解: lab2/code.md
+    - 实验步骤: lab2/step.md
+    - 实验任务: lab2/task.md
 plugins:
   - search
   - git-revision-date-localized:
