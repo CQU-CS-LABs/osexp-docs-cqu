@@ -18,6 +18,7 @@ LAB5    := -DLAB5_EX1 -DLAB5_EX2
 
 编译并运行代码的命令如下：
 ```
+make clean
 make
 make qemu -j 16
 ```
