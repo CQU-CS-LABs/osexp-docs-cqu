@@ -12,6 +12,7 @@ nav:
     - 编写裸机程序: lab0/bare-prog.md
     - 实验任务: lab0/task.md
   - 实验一-异常与中断:
+    - 获取实验资料: lab1/getcode.md
     - 背景介绍: lab1/intro.md
     - 代码讲解: lab1/code.md
     - 实验步骤: lab1/step.md

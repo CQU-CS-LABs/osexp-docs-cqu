@@ -1,17 +1,13 @@
 ### 1. 补全代码
-注意代码中有“LAB5”的注释的地方，代码中所有需要完成的地方都有“LAB5”和“YOUR CODE”的注释。同学们可以根据代码中的注释的提示，思考练习中的问题来补全代码。
+注意代码中有“LAB3”的注释的地方，代码中所有需要完成的地方都有“LAB3”和“YOUR CODE”的注释。同学们可以根据代码中的注释的提示，思考练习中的问题来补全代码。
 
 ### 2. Makefile修改 
-在Makefile中取消LAB5 := -DLAB5_EX1 -DLAB5_EX2(第10行)的注释
-```
-LAB1    := -DLAB1_EX4 # -D_SHOW_100_TICKS -D_SHOW_SERIAL_INPUT
-LAB2    := -DLAB2_EX1 -DLAB2_EX2 -DLAB2_EX3
-LAB3    := -DLAB3_EX1 -DLAB3_EX2
-LAB4    := -DLAB4_EX1 -DLAB4_EX2
-LAB5    := -DLAB5_EX1 -DLAB5_EX2
-# LAB6    := -DLAB6_EX2
-# LAB7    := -DLAB7_EX1 #-D_SHOW_PHI
-# LAB8    := -DLAB8_EX1 -DLAB8_EX2
+
+```makefile
+LAB1	:= -DLAB1_EX3 -DLAB1_EX4 #-D_SHOW_100_TICKS -D_SHOW_SERIAL_INPUT
+LAB2	:= -DLAB2_EX1 -DLAB2_EX2 -DLAB2_EX3
+LAB3	:= -DLAB3_EX1 -DLAB3_EX2
+#LAB4	:= -DLAB4_EX1 -DLAB4_EX2
 ```
 
 ### 3. 编译运行
