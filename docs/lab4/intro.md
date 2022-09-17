@@ -22,7 +22,7 @@ ucore模仿了UNIX的文件系统设计，ucore的文件系统架构主要由四
 
 对照上面的层次我们再大致介绍一下文件系统的访问处理过程，加深对文件系统的总体理解。假如应用程序操作文件（打开/创建/删除/读写），首先需要通过文件系统的通用文件系统访问接口层给用户空间提供的访问接口进入文件系统内部，接着由文件系统抽象层把访问请求转发给某一具体文件系统（比如SFS文件系统），具体文件系统（Simple FS文件系统层）把应用程序的访问请求转化为对磁盘上的block的处理请求，并通过外设接口层交给磁盘驱动例程来完成具体的磁盘操作。结合用户态写文件函数write的整个执行过程，我们可以比较清楚地看出ucore文件系统架构的层次和依赖关系。
 
-![image](https://cyyself.github.io/ucore_la32_docs/lab8_figs/image001.png)
+![](../img/lab4_image001.png)
 
 **ucore文件系统总体结构**
 
@@ -35,7 +35,7 @@ ucore模仿了UNIX的文件系统设计，ucore的文件系统架构主要由四
 
 如果一个用户进程打开了一个文件，那么在ucore中涉及的相关数据结构（其中相关数据结构将在下面各个小节中展开叙述）和关系如下图所示：
 
-![image](https://cyyself.github.io/ucore_la32_docs/lab8_figs/image002.png)
+![](../img/lab4_image002.png)
 
 **ucore中文件相关关键数据结构及其关系**
 
@@ -155,7 +155,7 @@ int (*vop_lookup)(struct inode *node, char *path, struct inode **node_store);
 
 SFS文件系统的布局如下图所示。
 
-![image](https://cyyself.github.io/ucore_la32_docs/lab8_figs/image003.png)
+![](../img/lab4_image003.png)
 
 第0个块（4K）是超级块（superblock），它包含了关于文件系统的所有关键参数，当计算机被启动或文件系统被首次接触时，超级块的内容就会被装入内存。其定义如下：
 
@@ -450,7 +450,7 @@ dev_stdin_read(char *buf, size_t len) {
 
 首先看看kern_init函数，可以发现与之前相比增加了对fs_init函数的调用。fs_init函数就是文件系统初始化的总控函数，它进一步调用了虚拟文件系统初始化函数vfs_init，与文件相关的设备初始化函数dev_init和Simple FS文件系统的初始化函数sfs_init。这三个初始化函数联合在一起，协同完成了整个虚拟文件系统、SFS文件系统和文件系统对应的设备（键盘、串口、磁盘）的初始化工作。其函数调用关系图如下所示：
 
-![image](https://cyyself.github.io/ucore_la32_docs/lab8_figs/image004.png)
+![](../img/lab4_image004.png)
 
 文件系统初始化调用关系图
 

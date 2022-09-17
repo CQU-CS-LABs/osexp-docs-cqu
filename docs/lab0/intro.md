@@ -27,6 +27,8 @@ LoongArch32有32个通用寄存器，记为r0~r31，这些寄存器在[ABI](http
 | `$r22`          | `$fp` / `$s9` |  栈帧指针 / 静态寄存器   |        是        |
 | `$r23` - `$r31` | `$s0` - `$s8` |        静态寄存器        |        是        |
 
+**注：LoongArch32老版本ABI中存在与`v0`、`v1`寄存器，与`a0`、`a1`同为`$r4`与`$r5`寄存器的别名，在新版ABI中已被舍弃。**
+
 ### 基本整数指令
 
 这一部分请同学们自行参考[龙芯架构32位精简版参考手册_v1.02.pdf](https://mirrors.tuna.tsinghua.edu.cn/loongson/docs/loongarch/%E9%BE%99%E8%8A%AF%E6%9E%B6%E6%9E%8432%E4%BD%8D%E7%B2%BE%E7%AE%80%E7%89%88%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_v1.02.pdf)。

@@ -25,15 +25,13 @@ nav:
   - 实验三-进程管理:
     - 背景介绍: lab3/intro.md
     - 实验目的: lab3/goal.md
-    - 实验内容: lab3/task.md
     - 编译方法: lab3/method.md
-    - 实验提交要求: lab3/requirements.md
+    - 实验任务: lab3/task.md
   - 实验四-文件系统:
     - 背景介绍: lab4/intro.md
     - 实验目的: lab4/goals.md
-    - 实验内容: lab4/tasks.md
     - 编译方法: lab4/compile.md
-    - 实验提交要求: lab4/requirements.md
+    - 实验任务: lab4/tasks.md
 plugins:
   - search
   - git-revision-date-localized:
