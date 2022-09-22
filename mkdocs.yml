@@ -33,7 +33,7 @@ nav:
     - 编译方法: lab4/compile.md
     - 实验任务: lab4/tasks.md
   - 开发板运行:
-    - Nexys4DDR: chiplab/n4ddr.md
+    - Nexys 4 DDR: chiplab/n4ddr.md
 plugins:
   - search
   - git-revision-date-localized:

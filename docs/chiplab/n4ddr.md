@@ -18,7 +18,7 @@ loongarch32r-linux-gnusf-strip ucore-kernel-initrd
 
     !!! warning
 
-        注意，Nexys 4 DDR开发板烧写SPI Flash的方式与龙芯杯开发板以及百芯计划开发板不同。请勿按照[官方流程](https://chiplab.readthedocs.io/zh/latest/FPGA_run_linux/linux_run.html)进行。
+        注意，Nexys 4 DDR开发板烧写SPI Flash的方式与龙芯杯开发板以及百芯计划开发板不同。请勿按照[官方流程](https://chiplab.readthedocs.io/zh/latest/FPGA_run_linux/flash.html)进行。
 
         此外，目前龙芯提供的PMON文件（2022年6月6日版本），串口波特率存在较大偏差。
         
@@ -41,14 +41,16 @@ loongarch32r-linux-gnusf-strip ucore-kernel-initrd
 ```bash
 git clone https://gitee.com/cyyself/chiplab.git -b n4ddr_with_cpu
 cd chiplab
-open fpga/nexys4ddr/system_run/system_run.xpr # 如果没有open命令可以自己打开这个xpr文件
+open fpga/nexys4ddr/system_run/system_run.xpr # 如果没有open命令可以自己用Vivado打开这个xpr文件
 ```
 
 直接生成bit流，然后烧到开发板上即可。（这个流程大家做过数字逻辑和组成原理的实验应该很熟悉。）
 
 ### 4. 将bit流写到开发板上。
 
-（这个流程大家做过数字逻辑和组成原理的实验应该很熟悉。）
+这个流程大家做过数字逻辑和组成原理的实验应该很熟悉。
+
+需要注意的是SPI Flash已被我们的PMON占用，所以请勿固化。
 
 ### 5. 剩余流程
 
