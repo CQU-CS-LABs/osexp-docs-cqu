@@ -1,31 +1,27 @@
 ## 开发板介绍
 
-我们计算机组成原理与硬件综合设计课程中使用的[Nexys 4 DDR](https://digilent.com/reference/programmable-logic/nexys-4-ddr/start) FPGA开发板能够运行龙芯开发的[Chiplab](https://gitee.com/loongson-edu/chiplab)软核。真实的Chiplab软核与QEMU存在一些差异，可以帮助同学们发现操作系统中未考虑到真实硬件的一些问题（例如Cache一致性、MMIO保序等问题）。
+我们计算机组成原理与硬件综合设计课程中使用的[Nexys 4 DDR](https://digilent.com/reference/programmable-logic/nexys-4-ddr/start) FPGA开发板能够运行龙芯开发的[Chiplab](https://gitee.com/loongson-edu/chiplab)软核。真实的Chiplab软核与QEMU存在一些差异，可以帮助同学们发现操作系统中未考虑到真实硬件的一些问题（例如I Cache与D Cache一致性是否正确维护）。
 
 ## 步骤
 
-### 1. 使用`loongarch32r-linux-gnusf-strip`对elf文件不必要的部分进行裁剪，否则PMON会报错。
+#### 1. 使用`loongarch32r-linux-gnusf-strip`对elf文件不必要的部分进行裁剪，否则PMON会报错。
 
 在ucore-loongarch32的obj文件夹执行以下命令：
 ```bash
 loongarch32r-linux-gnusf-strip ucore-kernel-initrd
 ```
 
-### 2. 将PMON（Bootloader）烧写到Nexys 4 DDR开发板的SPI Flash
+#### 2. 将PMON（Bootloader）烧写到Nexys 4 DDR开发板的SPI Flash
+
+!!! warning
+
+    注意，Nexys 4 DDR开发板烧写SPI Flash的方式与龙芯杯开发板以及百芯计划开发板不同。请勿按照[官方流程](https://chiplab.readthedocs.io/zh/latest/FPGA_run_linux/flash.html)进行。
 
 1. 将开发板连上电脑，打开Vivado的Hardware Manager
+
 2. 下载[PMON文件](../static/gzrom-uart_div_18.bin)
 
-    !!! warning
-
-        注意，Nexys 4 DDR开发板烧写SPI Flash的方式与龙芯杯开发板以及百芯计划开发板不同。请勿按照[官方流程](https://chiplab.readthedocs.io/zh/latest/FPGA_run_linux/flash.html)进行。
-
-        此外，目前龙芯提供的PMON文件（2022年6月6日版本），串口波特率存在较大偏差。
-        
-        根据计算，串口分频比=33MHz/16/115200bauds=17.90，如果分频比设置为17而非18会导致串口波特率偏移达到5%，实际上这一数值应该四舍五入。
-        
-        但Nexys 4 DDR开发板的USB串口芯片对波特率非常敏感，如果使用该版本PMON会导致串口时常出现乱码的情况。
-
+    你也可以从[Chiplab文档](https://gitee.com/loongson-edu/chiplab/blob/chiplab_diff/docs/FPGA_run_linux/linux_run.md)中下载最新PMON文件，但在Nexys 4 DDR开发板上NAND Flash检测有些许问题，导致会去对一个不存在的NAND进行坏块扫描，启动时间会长一些，推荐使用这里助教手动patch的版本。
 
 3. 在Hardware Manager中连接开发板，并选中FPGA芯片，点击右键，选择`Add Configuration Memory Device`。
 
@@ -34,7 +30,7 @@ loongarch32r-linux-gnusf-strip ucore-kernel-initrd
 5. 使用刚刚下载的PMON文件`gzrom-uart_div_18.bin`进行烧写。
 
 
-### 3. 使用Vivado生成Chiplab的FPGA bit流。
+#### 3. 使用Vivado生成Chiplab的FPGA bit流。
 
 下载助教做好的Vivado工程。
 
@@ -46,13 +42,13 @@ open fpga/nexys4ddr/system_run/system_run.xpr # 如果没有open命令可以自�
 
 直接生成bit流，然后烧到开发板上即可。（这个流程大家做过数字逻辑和组成原理的实验应该很熟悉。）
 
-### 4. 将bit流写到开发板上。
+#### 4. 将bit流写到开发板上。
 
 这个流程大家做过数字逻辑和组成原理的实验应该很熟悉。
 
 需要注意的是SPI Flash已被我们的PMON占用，所以请勿固化。
 
-### 5. 剩余流程
+#### 5. 剩余流程
 
 以下流程可直接参考[龙芯Chiplab文档](https://chiplab.readthedocs.io/zh/latest/FPGA_run_linux/linux_run.html#id1)，从4.3节开始，4.5节除外（因为Nexys 4 DDR没有NAND Flash）。
 
@@ -92,4 +88,5 @@ open fpga/nexys4ddr/system_run/system_run.xpr # 如果没有open命令可以自�
 如果同学们想要在这个开发板上运行LoongArch32的Linux，可以阅读更多说明：
 
 1. [Chiplab帮助文档](https://chiplab.readthedocs.io/)
-2. [Chiplab移植N4DDR说明](https://gitee.com/cyyself/chiplab/tree/n4ddr_with_cpu/fpga/nexys4ddr)
+
+2. [Chiplab移植N4DDR说明](https://gitee.com/loongson-edu/chiplab/tree/chiplab_diff/fpga/nexys4ddr)
