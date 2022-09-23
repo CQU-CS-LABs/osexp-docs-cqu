@@ -42,6 +42,10 @@ open fpga/nexys4ddr/system_run/system_run.xpr # 如果没有open命令可以自�
 
 直接生成bit流，然后烧到开发板上即可。（这个流程大家做过数字逻辑和组成原理的实验应该很熟悉。）
 
+!!! warning
+
+    如果使用新版本的Vivado，在更新IP核时应选择 **Continue with Core Container Disabled**.
+
 #### 4. 将bit流写到开发板上。
 
 这个流程大家做过数字逻辑和组成原理的实验应该很熟悉。
@@ -73,7 +77,9 @@ open fpga/nexys4ddr/system_run/system_run.xpr # 如果没有open命令可以自�
 
     使用WSL2的同学注意：WSL2中网卡为NAT模式，TFTP协议使用UDP传输，请确保你使用的端口转发方式能够正确处理UDP，否则建议将文件复制出来，在Host端Windows运行。
 
-- 在PMON中载入uCore内核
+    然后，将你要传到开发板上的裸机程序（甚至Lab0的最简裸机程序也是可以的），放到tftp服务器软件设定的根目录下。
+
+- 在PMON中载入内核
 
     在PMON中执行：
     ```bash
