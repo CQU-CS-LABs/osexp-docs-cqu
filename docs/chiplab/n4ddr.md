@@ -21,7 +21,7 @@ loongarch32r-linux-gnusf-strip ucore-kernel-initrd
 
 2. 下载[PMON文件](../static/gzrom-uart_div_18.bin)
 
-    你也可以从[Chiplab文档](https://gitee.com/loongson-edu/chiplab/blob/chiplab_diff/docs/FPGA_run_linux/linux_run.md)中下载最新PMON文件，但在Nexys 4 DDR开发板上NAND Flash检测有些许问题，导致会去对一个不存在的NAND进行坏块扫描，启动时间会长一些，推荐使用这里助教手动patch的版本。
+    你也可以从[Chiplab文档](https://gitee.com/loongson-edu/chiplab/blob/chiplab_diff/docs/FPGA_run_linux/linux_run.md)中下载最新PMON文件。
 
 3. 在Hardware Manager中连接开发板，并选中FPGA芯片，点击右键，选择`Add Configuration Memory Device`。
 
