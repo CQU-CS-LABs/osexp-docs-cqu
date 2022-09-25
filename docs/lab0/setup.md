@@ -13,7 +13,7 @@
 如果同学们使用非x86-64架构的计算机进行实验，例如使用ARM架构的Apple Silicon的Mac甚至是树莓派，可以使用虚拟机安装一个自己指令集架构的Linux发行版（对于ARM推荐Debian，作为Ubuntu的上游软件支持较丰富），然后执行以下命令安装qemu-user模拟x86-64环境，就可以在Linux中运行x86架构的二进制程序了：
 
 ```shell
-sudo apt install qemu-user qemu-user-static gcc-x86-64-linux-gnu binutils-x86-64-linux-gnu binutils-x86-64-linux-gnu-dbg build-essential
+sudo apt install qemu-user qemu-user-static binfmt-support gcc-x86-64-linux-gnu binutils-x86-64-linux-gnu binutils-x86-64-linux-gnu-dbg build-essential
 ```
 
 之后的操作与x86-64的Linux完全相同。
