@@ -4,11 +4,65 @@
 
 显然，由于进程的执行空间扩展到了用户态空间，且出现了创建子进程执行应用程序等与前面的实验有较大不同的地方，所以具体实现的不同主要集中在进程管理和内存管理部分。首先，我们从ucore的初始化部分来看，会发现初始化的总控函数kern_init没有任何变化。但这并不意味着二者差别不大。其实kern_init调用的物理内存初始化，进程管理初始化等都有一定的变化。
 
-- 在内存管理部分，用户进程管理需要增加用户态虚拟内存的管理。为了管理用户态的虚拟内存，需要对页表的内容进行扩展，能够把部分物理内存映射为用户态虚拟内存。如果某进程执行过程中，CPU在用户态下执行（**在CSR.CRMD中的PLV域，如果为0，表示CPU运行在特权态；如果为3，表示CPU运行在用户态**。），则可以访问本进程页表描述的用户态虚拟内存，但由于权限不够，不能访问内核态虚拟内存。另一方面，不同的进程有各自的页表，所以即使不同进程的用户态虚拟地址相同，但由于页表把虚拟页映射到了不同的物理页帧，所以不同进程的虚拟内存空间是被隔离开的，相互之间无法直接访问。在用户态内存空间和内核态内存空间之间需要拷贝数据，让CPU处在内核态才能完成对用户空间的读或写，为此需要设计专门的拷贝函数（copy_from_user和copy_to_user）完成。但反之则会导致违反CPU的权限管理，导致内存访问异常。
+- **在内存管理部分，用户进程管理需要增加用户态虚拟内存的管理**。为了管理用户态的虚拟内存，需要对页表的内容进行扩展，能够把部分物理内存映射为用户态虚拟内存。如果某进程执行过程中，CPU在用户态下执行（**在CSR.CRMD中的PLV域，如果为0，表示CPU运行在特权态；如果为3，表示CPU运行在用户态**。），则可以访问本进程页表描述的用户态虚拟内存，但由于权限不够，不能访问内核态虚拟内存。另一方面，不同的进程有各自的页表，所以即使不同进程的用户态虚拟地址相同，但由于页表把虚拟页映射到了不同的物理页帧，所以不同进程的虚拟内存空间是被隔离开的，相互之间无法直接访问。在用户态内存空间和内核态内存空间之间需要拷贝数据，让CPU处在内核态才能完成对用户空间的读或写，为此需要设计专门的拷贝函数（copy_from_user和copy_to_user）完成。但反之则会导致违反CPU的权限管理，导致内存访问异常。
 
-- 在进程管理方面，主要涉及到的是进程控制块中与内存管理相关的部分，包括建立进程的页表和维护进程可访问空间（可能还没有建立虚实映射关系）的信息；加载一个ELF格式的程序到进程控制块管理的内存中的方法；在进程复制（fork）过程中，把父进程的内存空间拷贝到子进程内存空间的技术。另外一部分与用户态进程生命周期管理相关，包括让进程放弃CPU而睡眠等待某事件；让父进程等待子进程结束；一个进程杀死另一个进程；给进程发消息；建立进程的血缘关系链表。
+- **在进程管理方面，主要涉及到的是进程控制块中与内存管理相关的部分**，包括①建立进程的页表和维护进程可访问空间（可能还没有建立虚实映射关系）的信息；②加载一个ELF格式的程序到进程控制块管理的内存中的方法；③在进程复制（fork）过程中，把父进程的内存空间拷贝到子进程内存空间的技术。另外一部分与用户态进程生命周期管理相关，包括让进程放弃CPU而睡眠等待某事件；让父进程等待子进程结束；一个进程杀死另一个进程；给进程发消息；建立进程的血缘关系链表。
 
 当实现了上述内存管理和进程管理的需求后，接下来ucore的用户进程管理工作就比较简单了。首先，“硬”构造出第一个进程，它是后续所有进程的祖先；然后，在proc_init函数中，通过alloc把当前ucore的执行环境转变成idle内核线程的执行现场；然后调用kernl_thread来创建第二个内核线程init_main，而init_main内核线程有创建了user_main内核线程。到此，内核线程创建完毕，应该开始用户进程的创建过程，这第一步实际上是通过user_main函数调用kernel_tread创建子进程，通过kernel_execve调用来把某一具体程序的执行内容放入内存。具体的放置方式是根据ld在此文件上的地址分配为基本原则，把程序的不同部分放到某进程的用户空间中，从而通过此进程来完成程序描述的任务。一旦执行了这一程序对应的进程，就会从内核态切换到用户态继续执行。以此类推，CPU在用户空间执行的用户进程，其地址空间不会被其他用户的进程影响，但由于系统调用（用户进程直接获得操作系统服务的唯一通道）、外设中断和异常中断的会随时产生，从而间接推动了用户进程实现用户态到到内核态的切换工作。ucore对CPU内核态与用户态的切换过程需要比较仔细地分析。当进程执行结束后，需回收进程占用和没消耗完毕的设备整个过程，且为新的创建进程请求提供服务。在本实验中，当系统中存在多个进程或内核线程时，ucore采用了一种FIFO的很简单的调度方法来管理每个进程占用CPU的时间和频度等。在ucore运行过程中，由于调度、时间中断、系统调用等原因，使得进程会进行切换、创建、睡眠、等待、发消息等各种不同的操作，周而复始，生生不息。
+
+## 进程控制块
+加载应用程序并执行实际上属于执行用户进程，操作系统在创建并执行用户进程之前，首先要创建内核进程。在了解这些之前，我们先介绍进程控制块的设计。进程管理信息用一个名为proc_struct的数据结构表示，在kern/process/proc.h中定义如下：
+```c
+struct proc_struct {
+    enum proc_state state;                      // Process state
+    int pid;                                    // Process ID
+    int runs;                                   // the running times of Proces
+    uintptr_t kstack;                           // Process kernel stack
+    volatile bool need_resched;                 // bool value: need to be rescheduled to release CPU?
+    struct proc_struct *parent;                 // the parent process
+    struct mm_struct *mm;                       // Process's memory management field
+    struct context context;                     // Switch here to run process
+    struct trapframe *tf;                       // Trap frame for current interrupt
+    uintptr_t cr3;                              // CR3 register: the base addr of Page Directroy Table(PDT)
+    uint32_t flags;                             // Process flag
+    char name[PROC_NAME_LEN + 1];               // Process name
+    list_entry_t list_link;                     // Process link list 
+    list_entry_t hash_link;                     // Process hash list
+    int exit_code;                              // exit code (be sent to parent proc)
+    uint32_t wait_state;                        // waiting state
+    struct proc_struct *cptr, *yptr, *optr;     // relations between processes
+    struct run_queue *rq;                       // running queue contains Process
+    list_entry_t run_link;                      // the entry linked in run queue
+    int time_slice;                             // time slice for occupying the CPU
+    struct fs_struct *fs_struct;                // the file related info(pwd, files_count, files_array, fs_semaphore) of process
+    skew_heap_entry_t lab6_run_pool;            // FOR LAB6 ONLY: the entry in the run pool
+    uint32_t lab6_stride;                       // FOR LAB6 ONLY: the current stride of the process 
+    uint32_t lab6_priority;                     // FOR LAB6 ONLY: the priority of process, set by lab6_set_priority(uint32_t)
+};
+```
+下面重点解释一下几个比较重要的成员变量：
+
+● **mm：内存管理的信息**，包括内存映射列表、页表指针等。mm里有个很重要的项pgdir，记录的是该进程使用的一级页表的物理地址。由于*mm=NULL，所以在proc_struct数据结构中需要有一个代替pgdir项来记录页表起始地址，这就是proc_struct数据结构中的cr3成员变量。
+
+● state：进程所处的状态。
+
+● parent：用户进程的父进程（创建它的进程）。在所有进程中，只有一个进程没有父进程，就是内核创建的第一个内核线程idleproc。内核根据这个父子关系建立一个树形结构，用于维护一些特殊的操作，例如确定某个进程是否可以对另外一个进程进行某种操作等等。
+
+● kstack: 每个线程都有一个内核栈，并且位于内核地址空间的不同位置。对于内核线程，该栈就是运行时的程序使用的栈；而对于普通进程，该栈是发生特权级改变的时候使保存被打断的硬件信息用的栈。uCore在创建进程时分配了 2 个连续的物理页（参见memlayout.h中KSTACKSIZE的定义）作为内核栈的空间。这个栈很小，所以内核中的代码应该尽可能的紧凑，并且避免在栈上分配大的数据结构，以免栈溢出，导致系统崩溃。**kstack记录了分配给该进程/线程的内核栈的位置**。主要作用有以下几点。首先，当内核准备从一个进程切换到另一个的时候，需要根据kstack 的值正确的设置好 tss，以便在进程切换以后再发生中断时能够使用正确的栈。其次，内核栈位于内核地址空间，并且是不共享的（每个线程都拥有自己的内核栈），因此不受到 mm 的管理，当进程退出的时候，内核能够根据 kstack 的值快速定位栈的位置并进行回收。
+
+● **tf：中断帧的指针**，总是指向内核栈的某个位置：当进程从用户空间跳到内核空间时，中断帧记录了进程在被中断前的状态。**当内核需要跳回用户空间时，需要调整中断帧以恢复让进程继续执行的各寄存器值**。除此之外，uCore内核允许嵌套中断。因此为了保证嵌套中断发生时tf 总是能够指向当前的trapframe，uCore 在内核栈上维护了 tf 的链，可以参考trap.c::trap函数做进一步的了解。
+
+● cr3: cr3 保存页表的物理地址，目的就是进程切换的时候方便直接使用 lcr3实现页表切换，避免每次都根据 mm 来计算 cr3。mm数据结构是用来实现用户空间的虚存管理的，当某个进程是一个普通用户态进程的时候，PCB 中的 cr3 就是 mm 中页表（pgdir）的物理地址；而当它是内核线程的时候，cr3 等于boot_cr3。而boot_cr3指向了uCore启动时建立好的饿内核虚拟空间的页目录表首地址。
+
+为了管理系统中所有的进程控制块，uCore维护了如下全局变量（位于kern/process/proc.c）：
+● static struct proc *current：当前占用CPU且处于“运行”状态进程控制块指针。通常这个变量是只读的，只有在进程切换的时候才进行修改。
+
+● **static struct proc *initproc：本实验中，此指针将指向第一个用户态进程**。
+
+● static list_entry_t hash_list[HASH_LIST_SIZE]：所有进程控制块的哈希表，proc_struct中的成员变量hash_link将基于pid链接入这个哈希表中。
+
+● list_entry_t proc_list：所有进程控制块的双向线性列表，proc_struct中的成员变量list_link将链接入这个链表中。
+
 
 ##  创建用户进程
 
@@ -148,17 +202,57 @@ vector128(vectors.S)--\>
 ```
 最终通过do_execve函数来完成用户进程的创建工作。此函数的主要工作流程如下：
 
-- 首先为加载新的执行码做好用户态内存空间清空准备。如果mm不为NULL，则设置页表为内核空间页表，且进一步判断mm的引用计数减1后是否为0，如果为0，则表明没有进程再需要此进程所占用的内存空间，为此将根据mm中的记录，释放进程所占用户空间内存和进程页表本身所占空间。最后把当前进程的mm内存管理指针为空。由于此处的initproc是内核线程，所以mm为NULL，整个处理都不会做。
+- **首先为加载新的执行码做好用户态内存空间清空准备**。如果mm不为NULL，则设置页表为内核空间页表，且进一步判断mm的引用计数减1后是否为0，如果为0，则表明没有进程再需要此进程所占用的内存空间，为此将根据mm中的记录，释放进程所占用户空间内存和进程页表本身所占空间。最后把当前进程的mm内存管理指针为空。由于此处的initproc是内核线程，所以mm为NULL，整个处理都不会做。
 
 - 接下来的一步是加载应用程序执行码到当前进程的新创建的用户态虚拟空间中。这里涉及到读ELF格式的文件，申请内存空间，建立用户态虚存空间，加载应用程序执行码等。load_icode函数完成了整个复杂的工作。
 
 load_icode函数的主要工作就是给用户进程建立一个能够让用户进程正常运行的用户环境。此函数有一百多行，完成了如下重要工作：
 
 1. 调用mm_create函数来申请进程的内存管理数据结构mm所需内存空间，并对mm进行初始化；
+mm是一个mm_struct结构的变量，这个数据结构表示了包含所有虚拟内存空间的共同属性(定义位于kern/mm/vmm.h)，具体定义如下：
+```c
+// the control struct for a set of vma using the same PDT
+struct mm_struct {
+    list_entry_t mmap_list;        // linear list link which sorted by start addr of vma
+    struct vma_struct *mmap_cache; // current accessed vma, used for speed purpose
+    pde_t *pgdir;                  // the PDT of these vma
+    int map_count;                 // the count of these vma
+    atomic_t mm_count;
+    semaphore_t mm_sem;
+    int locked_by;
+
+};
+```
+    - mmap_list是双向链表头，链接了所有属于同一页目录表的虚拟内存空间。
+    - mmap_cache是指向当前正在使用的虚拟内存空间，由于操作系统执行的“局部性”原理，当前正在用到的虚拟内存空间在接下来的操作中可能还会用到，这时就不需要查链表，而是直接使用此指针就可找到下一次要用到的虚拟内存空间。由于mmap_cache 的引入，可使得 mm_struct 数据结构的查询加速 30% 以上。
+    - **pgdir 所指向的就是mm_struct数据结构所维护的页表。通过访问pgdir可以查找某虚拟地址对应的页表项是否存在以及页表项的属性等**。
+    - map_count记录mmap_list 里面链接的 vma_struct的个数。
+
+    涉及mm_struct的操作函数比较简单，只有mm_create和mm_destroy两个函数，从字面意思就可以看出是是完成mm_struct结构的变量创建和删除。
 
 2. 调用setup_pgdir来申请一个页目录表所需的一个页大小的内存空间，并把描述ucore内核虚空间映射的内核页表（boot_pgdir所指）的内容拷贝到此新目录表中，最后让mm->pgdir指向此页目录表，这就是进程新的页目录表了，且能够正确映射内核虚空间；
+setup_pgdir函数的定义如下(kern/process/proc.c)：
+```c
+// setup_pgdir - alloc one page as PDT
+static int
+setup_pgdir(struct mm_struct *mm) {
+    struct Page *page;
+    if ((page = alloc_page()) == NULL) { //申请一页的内存空间
+        return -E_NO_MEM;
+    }
+    pde_t *pgdir = page2kva(page);
+    memcpy(pgdir, boot_pgdir, PGSIZE);//将描述ucore内核虚空间映射的内核页表（boot_pgdir所指）的内容拷贝到此新目录表中
+    //panic("unimpl");
+    //pgdir[PDX(VPT)] = PADDR(pgdir) | PTE_P | PTE_W;
+    mm->pgdir = pgdir; //将mm->pgdir指向此页目录表，使进程的页目录表能正确的映射内核虚空间
+    return 0;
+}
+```
 
 3. 根据应用程序执行码的起始位置来解析此ELF格式的执行程序，并调用mm_map函数根据ELF格式的执行程序说明的各个段（代码段、数据段、BSS段等）的起始位置和大小建立对应的vma结构，并把vma插入到mm结构中，从而表明了用户进程的合法用户态虚拟地址空间；
+```c
+mm_map(mm, ph->p_va, ph->p_memsz, vm_flags, NULL)
+```
 
 4. 调用根据执行程序各个段的大小分配物理内存空间，并根据执行程序各个段的起始位置确定虚拟地址，并在页表中建立好物理地址和虚拟地址的映射关系，然后把执行程序各个段的内容拷贝到相应的内核虚拟地址中，至此应用程序执行码和数据已经根据编译时设定地址放置到虚拟内存中了；
 
@@ -167,6 +261,34 @@ load_icode函数的主要工作就是给用户进程建立一个能够让用户�
 6. 至此,进程内的内存管理vma和mm数据结构已经建立完成，于是把mm->pgdir赋值到变量current_pgdir中，即更新了用户进程的虚拟内存空间，此时的initproc已经被hello的代码和数据覆盖，成为了第一个用户进程，但此时这个用户进程的执行现场还没建立好；
 
 7. 先清空进程的中断帧，再重新设置进程的中断帧，使得在执行中断返回指令后，能够让CPU转到用户态特权级，并回到用户态内存空间，且能够跳转到用户进程的第一条指令执行，并确保在用户态能够响应中断；
+这一步涉及练习1中需要补充的代码。如下所示：
+```c
+ #ifdef LAB3_EX1
+/* LAB3:EXERCISE1 YOUR CODE
+ * should set tf_era,tf_regs.reg_r[LOONGARCH_REG_SP],tf->tf_prmd
+ * NOTICE: If we set trapframe correctly, then the user level process can return to USER MODE from kernel and enable interrupt. So
+ *          tf->tf_prmd should be PLV_USER | CSR_CRMD_IE
+ *          tf->tf_era should be the entry point of this binary program (elf->e_entry)
+ *          tf->tf_regs.reg_r[LOONGARCH_REG_SP] should be the top addr of user stack (USTACKTOP)
+ */
+// 根据提示补充代码，完成练习。
+#endif
+```
+我们需要补充的代码就是设置tf_era, tf_regs.regr[LOONGARCH_REG_SP],tf->tf_prmd这三个变量的内容。如果我们正确地设置了中断帧的内容，操作系统可以由内核态转为用户态运行，且重新开启中断响应。中断帧trapframe的结构定义如下(kern/trap/loongarch_trapframe.h)：
+```c
+struct trapframe {
+    uint32_t tf_badv; // CSR[0x7]
+    uint32_t tf_estat; // CSR[0x5]
+    uint32_t tf_prmd; // CSR[0x1]
+    uint32_t tf_ra;
+    struct pushregs tf_regs;
+    uint32_t tf_era; // CSR[0x6] same as epc on LOONGARCH
+};
+```
+    - tf_regs: 当进程从内核态转为用户态时，要把堆栈寄存器的栈指针($sp)改为用户栈的地址，**即tf_regs[LOONGARCH_REG_SP]应设置为USTACKTOP**。
+    - tf_era: 表示的是例外返回地址（触发例外指令的PC），为了使操作系统跳转到用户进程的第一条指令执行，练习1中的tf_era应设置为ELF执行文件设定的起始地址，**即tf_era应设置为elf->e_entry**。
+    - tf_prmd: CSR[0x1]指的是控制状态寄存器例外前模式信息(PRMD)的内容(参考[龙芯架构32位精简版参考手册_v1.02.pdf](https://mirrors.tuna.tsinghua.edu.cn/loongson/docs/loongarch/%E9%BE%99%E8%8A%AF%E6%9E%B6%E6%9E%8432%E4%BD%8D%E7%B2%BE%E7%AE%80%E7%89%88%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_v1.02.pdf)中p53)，若操作系统要从内核态切换至用户态，且开启中断响应，**tf_prmd应设置为PLV_USER | CSR_CRMD_IE**。
+
 
 至此，用户进程的用户环境已经搭建完毕。此时initproc将按产生系统调用的函数调用路径原路返回，执行中断返回指令“ertn”（位于exception.S的最后一句）后，将切换到用户进程hello的第一条语句位置_start处（位于user/libs/initcode.S的第三句）开始执行。
 
