@@ -253,6 +253,24 @@ setup_pgdir(struct mm_struct *mm) {
 ```c
 mm_map(mm, ph->p_va, ph->p_memsz, vm_flags, NULL)
 ```
+在ucore中描述应用程序对虚拟内存“需求”的数据结构是vma_struct（定义在vmm.h中），以及针对vma_struct的函数操作。这里把一个vma_struct结构的变量简称为vma变量。vma_struct的定义如下：
+```c
+struct vma_struct {
+    // the set of vma using the same PDT
+    struct mm_struct *vm_mm;
+    uintptr_t vm_start; // start addr of vma
+    uintptr_t vm_end; // end addr of vma
+    uint32_t vm_flags; // flags of vma
+    //linear list link which sorted by start addr of vma
+    list_entry_t list_link;
+};
+```
+vm_start和vm_end描述了一个连续地址的虚拟内存空间的起始位置和结束位置，这两个值都应该是PGSIZE 对齐的，而且描述的是一个合理的地址空间范围（即严格确保 vm_start < vm_end的关系）；list_link是一个双向链表，按照从小到大的顺序把一系列用vma_struct表示的虚拟内存空间链接起来，并且还要求这些链起来的vma_struct应该是不相交的，即vma之间的地址空间无交集；vm_flags表示了这个虚拟内存空间的属性，目前的属性包括：
+```c
+#define VM_READ 0x00000001 //只读
+#define VM_WRITE 0x00000002 //可读写
+#define VM_EXEC 0x00000004 //可执行
+```
 
 4. 调用根据执行程序各个段的大小分配物理内存空间，并根据执行程序各个段的起始位置确定虚拟地址，并在页表中建立好物理地址和虚拟地址的映射关系，然后把执行程序各个段的内容拷贝到相应的内核虚拟地址中，至此应用程序执行码和数据已经根据编译时设定地址放置到虚拟内存中了；
 
