@@ -398,7 +398,7 @@ pte_t *get_pte(pde_t *pgdir, uintptr_t la, bool create)
 
 下面的调用关系图可以比较好地看出get\_pte在实现上述流程中的位置：
 
-![](G:\py\sy\ucore_la32_docs-master\lab2_figs\image007.png)
+![](../img/lab2_image007.png)
 
 图6 get\_pte调用关系图
 
