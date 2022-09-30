@@ -54,6 +54,8 @@ sudo apt install qemu-user qemu-user-static binfmt-support gcc-x86-64-linux-gnu 
         --net=host \
         --workdir="/home/$USER" \
         --volume="/home:/home" \
+        --volume="/root:/root" \
+        --volume="/mnt:/mnt" \
         --volume="/etc/group:/etc/group:ro" \
         --volume="/etc/passwd:/etc/passwd:ro" \
         --volume="/etc/shadow:/etc/shadow:ro" \

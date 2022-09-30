@@ -25,17 +25,17 @@ chenyu$ make qemu -j 16
 (THU.CST) os is loading ...
 
 Special kernel symbols:
-  entry  0xA00000A0 (phys)
-  etext 0xA0020000 (phys)
-  edata 0xA0153EC0 (phys)
-  end   0xA01571A0 (phys)
-Kernel executable memory footprint: 1245KB
+  entry  0xA0000120 (phys)
+  etext 0xA0022000 (phys)
+  edata 0xA017C630 (phys)
+  end   0xA017F910 (phys)
+Kernel executable memory footprint: 1399KB
 memory management: default_pmm_manager
 memory map:
     [A0000000, A2000000]
 
-freemem start at: A0198000
-free pages: 00001E68
+freemem start at: A01C0000
+free pages: 00001E40
 ## 00000020
 check_alloc_page() succeeded!
 check_pgdir() succeeded!
@@ -45,19 +45,9 @@ kmalloc_init() succeeded!
 check_vma_struct() succeeded!
 check_pgfault() succeeded!
 check_vmm() succeeded.
-sched class: RR_scheduler
+sched class: stride_scheduler
 proc_init succeeded
-kernel_execve: pid = 2, name = "exit".
-I am the parent. Forking the child...
-I am parent, fork a child pid 3
-I am the parent, waiting now..
-I am the child.
-waitpid 3 ok.
-exit pass.
-all user-mode processes have quit.
-init check memory pass.
-kernel panic at kern/process/proc.c:554:
-    initproc exit.
+LAB3 Check Pass!
 
 Welcome to the kernel debug monitor!!
 Type 'help' for a list of commands.
