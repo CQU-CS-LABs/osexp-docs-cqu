@@ -8,6 +8,19 @@
 
 常见Linux发行版安装Docker方法可参考[清华镜像站上的教程](https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/)。
 
+!!! note
+
+    使用WSL2+Ubuntu 22.04的同学请注意：
+
+    如果遇到Docker Daemon没有启动，也许是iptables-legacy没有安装，可以执行以下命令解决：
+
+    ```shell
+    sudo apt isntall iptables
+    sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+    sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+    sudo service docker start
+    ```
+
 ### 对于使用的电脑非x86-64架构的同学
 
 如果同学们使用非x86-64架构的计算机进行实验，例如使用ARM架构的Apple Silicon的Mac甚至是树莓派，可以使用虚拟机安装一个自己指令集架构的Linux发行版（对于ARM推荐Debian，作为Ubuntu的上游软件支持较丰富），然后执行以下命令安装qemu-user模拟x86-64环境，就可以在Linux中运行x86架构的二进制程序了：
