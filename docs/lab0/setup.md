@@ -15,7 +15,7 @@
     如果遇到Docker Daemon没有启动，也许是iptables-legacy没有安装，可以执行以下命令解决：
 
     ```shell
-    sudo apt isntall iptables
+    sudo apt install iptables
     sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
     sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
     sudo service docker start
