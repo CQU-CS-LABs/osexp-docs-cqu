@@ -20,6 +20,8 @@
     sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
     sudo service docker start
     ```
+    
+    另外，WSL1不支持Docker，没有条件安装WSL2的同学建议使用虚拟机。
 
 ### 对于使用的电脑非x86-64架构的同学
 
