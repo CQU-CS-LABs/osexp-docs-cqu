@@ -40,3 +40,17 @@ sudo service docker start
 ## 6. 虚拟机图形操作不流畅
 
 虚拟机显卡性能较低，大家可以在虚拟机外面装VSCode，然后remote SSH连到虚拟机。
+
+## 7. WSL无法安装，提示要开启虚拟化，但是虚拟化已经开启
+
+很有可能是有些同学用了一些无法和Windows虚拟化平台共存的软件导致的。例如部分Android模拟器（为什么不使用 Windows 11 自带的性能更好的 Windows Subsystem for Android替代呢？）。
+
+这些软件会修改bcd禁用虚拟化，我们可以使用以下命令重新开启：
+
+```powershell
+bcdedit /set hypervisorlaunchtype auto
+```
+
+## 8. WSL2里安装了Docker，VSCode找不到
+
+VSCode不能连WSL2里的Docker，需要先使用WSL Remote连到WSL里的VSCode，再在这个里面装VSCode的Docker插件。
