@@ -54,3 +54,37 @@ bcdedit /set hypervisorlaunchtype auto
 ## 8. WSL2里安装了Docker，VSCode找不到
 
 VSCode不能连WSL2里的Docker，需要先使用WSL Remote连到WSL里的VSCode，再在这个里面装VSCode的Docker插件。
+
+## 9. apt的https出现证书错误
+
+一般有两种情况：
+
+1. 虚拟机网卡用了桥接模式，但是虚拟机没有登录校园网。
+
+    解决方法：改为NAT模式，共享你电脑的IP地址上网。
+
+2. 使用的Ubuntu版本较老，CA证书没有更新
+
+    修改`/etc/apt/sources.list`，将所有的https改为http，然后重新执行`apt update`与`apt upgrade`。
+
+## 10. 按照清华镜像站安装Docker无法添加gpg密钥，提示no such file or directory
+
+还是Ubuntu版本问题，Ubuntu 20.04没有`/etc/apt/keyrings`文件夹，需要大家自行使用`mkdir -p /etc/apt/keyrings`创建。
+
+## 来自助教的提醒
+
+最后，还是希望大家能自己读懂错误提示，培养自己解决问题的能力。
+
+别人根据你的错误告诉你解决方案只不过是治标不治本，当同学们以后做的工作基于一些比较新的框架以及开源代码时可能还时常需要修这些开源代码本身的问题，甚至经常会给这些开源项目提交Patch。诚然，解决问题的过程需要很多的基础知识以及经验，但希望大家能够在遇到这种问题时，能够自己找到解决问题的思路。
+
+给同学一些建议：
+
+1. 学会读英文的错误提示，遇到错误是正常的，不要害怕。
+
+2. 学会根据提示上网搜索，并尝试用英语以及搜索英语较为友好的搜索引擎。
+
+    某些搜索引擎对于某些网站SEO太过靠前很容易搜到一些不专业的内容。让你无法了解问题的本质，导致一些过时的问题。
+    
+    诸如Ubuntu换了一个旧版本的源然后用aptitude或者apt install -f把整个系统的软件包依赖完全破坏，最后只能重装系统。然而用aptitude和apt install -f本身就是非常错误的做法。
+
+3. 学会读软件的文档。以及Linux下各种工具的man。当无法读文档解决问题时，或许我们还要自己去阅读相关的代码。
