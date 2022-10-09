@@ -91,6 +91,12 @@ VSCode不能连WSL2里的Docker，需要先使用WSL Remote连到WSL里的VSCode
 
     2. 若不能解决，可以先考虑直接用attach shell的方法使用Docker，每次新建终端重新attach新的Shell，并cd到当前路径即可。
 
+## 13. gdb提示The program is not being run.
+
+请同学们仔细查看gdb输出的提示，已经告诉了你需要将什么命令加入到~/.gdbinit或/.gdbinit中。这个是由于gdb出于安全考虑默认禁止了.gdbinit脚本的执行。防止用户从不可信的来源获取了某个含有.gdbinit的文件夹带来远程执行。
+
+如果是手打gdb的同学，请确保qemu通过-S启动了gdb-server，并使用target remote :1234连接上qemu。
+
 ## 来自助教的提醒
 
 最后，还是希望大家能自己读懂错误提示，培养自己解决问题的能力。

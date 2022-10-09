@@ -35,7 +35,7 @@ nav:
   - 开发板运行:
     - Nexys 4 DDR: chiplab/n4ddr.md
   - 常见问题:
-    - lab0: faq/lab0.md
+    - 环境搭建: faq/env.md
 plugins:
   - search
   - git-revision-date-localized:
