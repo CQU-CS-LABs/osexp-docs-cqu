@@ -71,6 +71,26 @@ VSCode不能连WSL2里的Docker，需要先使用WSL Remote连到WSL里的VSCode
 
 还是Ubuntu版本问题，Ubuntu 20.04没有`/etc/apt/keyrings`文件夹，需要大家自行使用`mkdir -p /etc/apt/keyrings`创建。
 
+## 11. WSL中attach VSCode时出现wsl ENOENT
+
+这个是由于本机环境变量找不到`wsl`导致的。
+
+先打开你的Windows的终端，看看输入wsl能不能打开。
+
+若不能，请检查你的电脑环境变量，确保系统的Path中存在`%SystemRoot%\system32`，若没有添加，然后完全关闭Visual Studio Code并重新打开。
+
+（助教十分好奇为什么会有大量同学出现同样的共性问题，该环境变量在Windows安装后应该是默认存在的，难道是看了同样的不靠谱配环境教程都把system32从Path里删了？）
+
+若能，助教也不知道是什么玄学问题，建议自己上网查找相关解决方法。
+
+## 12. Visual Studio Code无法Attach到Docker，提示docker在Path中找不到。
+
+解决方案：
+
+    1. 先升级到最新版本Visual Studio Code，老版本存在这个问题。
+
+    2. 若不能解决，可以先考虑直接用attach shell的方法使用Docker，每次新建终端重新attach新的Shell，并cd到当前路径即可。
+
 ## 来自助教的提醒
 
 最后，还是希望大家能自己读懂错误提示，培养自己解决问题的能力。
