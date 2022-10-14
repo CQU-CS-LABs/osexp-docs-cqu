@@ -348,7 +348,7 @@ SECTIONS
  phy addr  = CSR.DMW0[31:29]  : virtual addr[28:0]
 ```
 
-**第一个阶段**从kernel_entry函数开始到pmm_init函数执行之前，ucore采用直接映射地址方式进行地址翻译，翻译方式如上。注意，由于0x80000000-0x9fffffff和0xa0000000-0xbfffffff才能进行直接映射，所以内核的大小不能超过512M。
+**第一个阶段** 从kernel_entry函数开始到pmm_init函数执行之前，ucore采用直接映射地址方式进行地址翻译，翻译方式如上。注意，由于0x80000000-0x9fffffff和0xa0000000-0xbfffffff才能进行直接映射，所以内核的大小不能超过512M。
 
 **第二个阶段**（创建初始页目录表，开启分页模式）从pmm_init函数被调用开始，在pmm_init函数中创建了boot_pgdir，初始化了页目录表，正式开始了页表映射地址翻译模式。
 
