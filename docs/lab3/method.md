@@ -47,9 +47,15 @@ check_pgfault() succeeded!
 check_vmm() succeeded.
 sched class: stride_scheduler
 proc_init succeeded
-LAB3 Check Pass!
-
-Welcome to the kernel debug monitor!!
-Type 'help' for a list of commands.
-K>
+kernel_execve: pid = 2, name = "exit".
+I am the parent. Forking the child...
+I am parent, fork a child pid 3
+I am the parent, waiting now..
+I am the child.
+waitpid 3 ok.
+exit pass.
+all user-mode processes have quit.
+init check memory pass.
+initproc exit.
+Lab3 Check Pass!
 ```
