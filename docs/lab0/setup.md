@@ -2,7 +2,7 @@
 
 环境准备：x86-64架构的Docker运行环境。
 
-因为LoongArch32的环境配置比较复杂，尤其是它的QEMU需要补充大量依赖，因此助教为了节省同学们的工作量打包了一个Docker镜像，它封装了所有运行我们的uCore实验所需的环境，[并已发布到Docker Hub](https://hub.docker.com/r/chenyy/la32r-env).
+因为LoongArch32的环境配置比较复杂，尤其是它的QEMU需要补充大量依赖，因此助教为了节省同学们的工作量打包了一个Docker镜像，它封装了所有运行我们的uCore实验所需的环境，[并已发布到Docker Hub(需使用VPN后访问)](https://hub.docker.com/r/chenyy/la32r-env)，同时该镜像也已上传至阿里云，下载方法[在此](https://gitee.com/xuguochao/la32r-env).
 
 这里推荐使用Windows的同学使用WSL2或Linux虚拟机安装Docker，使用Linux的同学直接安装即可，使用macOS（含Apple Silicon）的同学使用Linux虚拟机安装Docker。
 
