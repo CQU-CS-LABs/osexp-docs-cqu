@@ -1,0 +1,1572 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
+    
+    
+      
+        <title>编写裸机程序 - 操作系统实验文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="操作系统实验文档" class="md-header__button md-logo" aria-label="操作系统实验文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            操作系统实验文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              编写裸机程序
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cyyself/osexp-docs-cqu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    osexp-docs-cqu
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      主页
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../intro/" class="md-tabs__link md-tabs__link--active">
+        实验零-裸机程序
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab1/getcode/" class="md-tabs__link">
+        实验一-异常与中断
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab2/intro/" class="md-tabs__link">
+        实验二-内存管理
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab3/intro/" class="md-tabs__link">
+        实验三-进程管理
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab4/intro/" class="md-tabs__link">
+        实验四-文件系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../chiplab/n4ddr/" class="md-tabs__link">
+        开发板运行
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../faq/env/" class="md-tabs__link">
+        常见问题
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="操作系统实验文档" class="md-nav__button md-logo" aria-label="操作系统实验文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    操作系统实验文档
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cyyself/osexp-docs-cqu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    osexp-docs-cqu
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          实验零-裸机程序
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验零-裸机程序" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          实验零-裸机程序
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        搭建实验环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          编写裸机程序
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        编写裸机程序
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    初识裸机程序
+  </a>
+  
+    <nav class="md-nav" aria-label="初识裸机程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    调用栈
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    程序里的各个存储区
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    链接
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    编写一个裸机程序
+  </a>
+  
+    <nav class="md-nav" aria-label="编写一个裸机程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    初始化的汇编代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    编写简单串口输出C程序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    编写链接脚本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    编写Makefile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    编译运行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qemu" class="md-nav__link">
+    退出QEMU
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          实验一-异常与中断
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验一-异常与中断" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          实验一-异常与中断
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/getcode/" class="md-nav__link">
+        获取实验资料
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/code/" class="md-nav__link">
+        代码讲解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/step/" class="md-nav__link">
+        实验步骤
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          实验二-内存管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验二-内存管理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          实验二-内存管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/code/" class="md-nav__link">
+        代码讲解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/step/" class="md-nav__link">
+        实验步骤
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          实验三-进程管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验三-进程管理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          实验三-进程管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/goal/" class="md-nav__link">
+        实验目的
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/method/" class="md-nav__link">
+        编译方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          实验四-文件系统
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验四-文件系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          实验四-文件系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/goals/" class="md-nav__link">
+        实验目的
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/compile/" class="md-nav__link">
+        编译方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/tasks/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          开发板运行
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发板运行" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          开发板运行
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chiplab/n4ddr/" class="md-nav__link">
+        Nexys 4 DDR
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          常见问题
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="常见问题" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          常见问题
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/env/" class="md-nav__link">
+        环境搭建
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    初识裸机程序
+  </a>
+  
+    <nav class="md-nav" aria-label="初识裸机程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    调用栈
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    程序里的各个存储区
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    链接
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    编写一个裸机程序
+  </a>
+  
+    <nav class="md-nav" aria-label="编写一个裸机程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    初始化的汇编代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    编写简单串口输出C程序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    编写链接脚本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    编写Makefile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    编译运行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qemu" class="md-nav__link">
+    退出QEMU
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/cyyself/osexp-docs-cqu/edit/master/docs/lab0/bare-prog.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>编写裸机程序</h1>
+
+<h2 id="_1">初识裸机程序<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>我们以往写用户程序时，通常都只关注代码本身，而将运行时的环境交给了编译器等系统软件进行处理，但我们若要编写裸机程序，就需要进一步揭开运行时环境的神秘面纱。</p>
+<p>强烈建议同学们阅读《程序员的自我修养：链接、装载与库》，会对这些问题有更加清晰的认识，在重庆大学A区与虎溪的图书馆均有馆藏。</p>
+<p>下表揭示了裸机程序与用户程序的区别：</p>
+<table>
+<thead>
+<tr>
+<th>对比对象</th>
+<th>裸机程序</th>
+<th>常规用户程序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内存地址空间</td>
+<td>自行管理物理地址空间，可以自行对虚拟内存进行配置后使自己运行在虚拟地址空间</td>
+<td>由操作系统管理的虚拟地址空间（不考虑Linux NOMMU模式）</td>
+</tr>
+<tr>
+<td>系统调用</td>
+<td>调用自己</td>
+<td>调用更高特权级的操作系统/固件</td>
+</tr>
+<tr>
+<td>栈的初始化</td>
+<td>自行完成</td>
+<td>操作系统载入用户进程时完成（毕竟还要通过栈传递参数）</td>
+</tr>
+<tr>
+<td>BSS段的清空</td>
+<td>自行完成</td>
+<td>操作系统分配虚拟页面时完成清零</td>
+</tr>
+</tbody>
+</table>
+<p>许多同学可能对于上表已经看懵了，不明白这些名词的具体含义，没关系，我们接下来一一解释：</p>
+<h3 id="_2">调用栈<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>我们知道编写的程序可以进行函数调用，也可以在调用后返回。那么我们可以思考，记录函数执行位置，包括局部变量的状态等可以采用一种先进后出的数据结构，也就是栈。这个调用栈的数据结构在不同的指令集架构的ABI（Application Binary Interface）中定义不同。且它的生长方式是向下生长。</p>
+<p>但我们需要先分配出一个栈，才能运行这种能进行函数调用的C语言程序。因此对于裸机程序而言，我们需要在汇编程序里先初始化GPR（通用寄存器）的sp指针，才能进入C程序。</p>
+<h3 id="_3">程序里的各个存储区<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>我们可以尝试运行以下实验，编写如下C语言程序：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>然后，执行以下命令编译为目标文件并查看目标文件的头：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>➜<span class="w">  </span>gcc<span class="w"> </span>hello.c<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>hello.o
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>➜<span class="w">  </span>objdump<span class="w"> </span>-h<span class="w"> </span>hello.o<span class="w">       </span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>hello.o:<span class="w">     </span>file<span class="w"> </span>format<span class="w"> </span>elf64-x86-64
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Sections:
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Idx<span class="w"> </span>Name<span class="w">          </span>Size<span class="w">      </span>VMA<span class="w">               </span>LMA<span class="w">               </span>File<span class="w"> </span>off<span class="w">  </span>Algn
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="m">0</span><span class="w"> </span>.text<span class="w">         </span>0000001a<span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">00000040</span><span class="w">  </span><span class="m">2</span>**0
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">                  </span>CONTENTS,<span class="w"> </span>ALLOC,<span class="w"> </span>LOAD,<span class="w"> </span>RELOC,<span class="w"> </span>READONLY,<span class="w"> </span>CODE
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="m">1</span><span class="w"> </span>.data<span class="w">         </span><span class="m">00000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span>0000005a<span class="w">  </span><span class="m">2</span>**0
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">                  </span>CONTENTS,<span class="w"> </span>ALLOC,<span class="w"> </span>LOAD,<span class="w"> </span>DATA
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="m">2</span><span class="w"> </span>.bss<span class="w">          </span><span class="m">00000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span>0000005a<span class="w">  </span><span class="m">2</span>**0
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">                  </span>ALLOC
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="m">3</span><span class="w"> </span>.rodata<span class="w">       </span>0000000c<span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span>0000005a<span class="w">  </span><span class="m">2</span>**0
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">                  </span>CONTENTS,<span class="w"> </span>ALLOC,<span class="w"> </span>LOAD,<span class="w"> </span>READONLY,<span class="w"> </span>DATA
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="m">4</span><span class="w"> </span>.comment<span class="w">      </span>0000001f<span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">00000066</span><span class="w">  </span><span class="m">2</span>**0
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">                  </span>CONTENTS,<span class="w"> </span>READONLY
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">  </span><span class="m">5</span><span class="w"> </span>.note.GNU-stack<span class="w"> </span><span class="m">00000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">00000085</span><span class="w">  </span><span class="m">2</span>**0
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">                  </span>CONTENTS,<span class="w"> </span>READONLY
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">  </span><span class="m">6</span><span class="w"> </span>.eh_frame<span class="w">     </span><span class="m">00000038</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">0000000000000000</span><span class="w">  </span><span class="m">00000088</span><span class="w">  </span><span class="m">2</span>**3
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">                  </span>CONTENTS,<span class="w"> </span>ALLOC,<span class="w"> </span>LOAD,<span class="w"> </span>RELOC,<span class="w"> </span>READONLY,<span class="w"> </span>DATA
+</code></pre></div>
+<p>这里可以看到，我们的程序分为了<code>.text</code>、<code>.data</code>、<code>.bss</code>、<code>.rodata</code>各存储段。</p>
+<p>其中：</p>
+<ul>
+<li>
+<p><code>.text</code>是代码段，放置的是我们的程序编译后的代码。</p>
+</li>
+<li>
+<p><code>.data</code>是数据段，这里放的是初始化过的静态变量（包含全局变量还有<code>static</code>修饰后的局部变量）。</p>
+</li>
+<li>
+<p><code>.bss</code>是存放未初始化的静态变量的区域。而在ELF文件中，它并不实际存储数据，仅用于告知操作系统载入进程时该段合法地址的存在。</p>
+</li>
+<li>
+<p><code>.rodata</code>存放的是只读数据，例如字符串常量与全局const变量就存放在这个位置。</p>
+</li>
+</ul>
+<p>这些段的元数据放在我们编译的产物（ELF文件）的头部分。</p>
+<h3 id="_4">链接<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>我们在大一的“程序设计基础”课程应该已经学过多文件的C语言程序编写以及链接过程，同学们应该也在其中学习了Makefile的基本使用。</p>
+<p>许多同学也许会好奇，链接器是如何将这些未定义的函数找到对应的位置并进行链接的呢？</p>
+<p>这里我们就得涉及到一个符号表的概念，在我们编译产生的ELF文件中，还有一个存放符号表的区域，其中符号指的是函数、变量等的名字，并记录他们对应的地址。这样在链接时就知道能够知道对应的位置，从而进行链接，生成出一个更大的可执行程序。</p>
+<p>而对于裸机程序，我们还有一个需求是设定程序各存储段的排布以及地址偏移量。地址偏移量可以告知编译器进行直接跳转时所需要的地址，这个时候我们就需要引入一个叫做ld脚本的东西，它可以帮助我们规划需要放入最终编译结果的各段的地址。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>小思考：</p>
+<ol>
+<li>
+<p>操作系统给用户进程分配虚拟内存空间时，为什么需要将对应页面清零后再分配？如果不清零会导致什么问题？（可以从安全等角度考虑）</p>
+</li>
+<li>
+<p>我们写C语言程序时开的局部变量不赋初始值为什么经常会得到一个随机数？是否与前面提到操作系统给用户进程分配虚拟页面时会进行清零的结论相悖？</p>
+</li>
+<li>
+<p>Linux NOMMU为什么只在部分指令集架构存在？部分存在NOMMU的指令集（如RISC-V）提供了什么隔离机制确保一个进程无法修改其他进程的数据？</p>
+</li>
+<li>
+<p>为什么我们在裸机程序中可以暂时不考虑malloc（new）这种堆内存分配？</p>
+</li>
+<li>
+<p>栈能不能改成向上生长？有什么利弊？</p>
+</li>
+<li>
+<p>结合程序的各段所需的最小权限不同，处理器的MMU可以提供哪些权限控制位确保程序因为漏洞导致任意内存读写时，攻击者能破坏的数据范围最低？例如如何才能让.text段和.rodata段不被修改，其他段的数据不可被执行？如果攻击者有能力破坏页表，还有什么安全机制可以加入处理器中进行更好的保护？</p>
+</li>
+</ol>
+</div>
+<h2 id="_5">编写一个裸机程序<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>至此，我们开始真正编写一个裸机程序，大家在搭建好的环境中新建文件夹，一步步开始吧！</p>
+<h3 id="_6">初始化的汇编代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">start.S</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span>
+<span class="normal"><a href="#__codelineno-2-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="na">.extern</span><span class="w"> </span><span class="no">main</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="na">.text</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="na">.globl</span><span class="w"> </span><span class="no">_start</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nl">_start:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="c1"># Config direct window and set PG</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="nf">li.w</span><span class="w">    </span><span class="no">$t0</span><span class="p">,</span><span class="w"> </span><span class="mi">0xa0000011</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="nf">csrwr</span><span class="w">   </span><span class="no">$t0</span><span class="p">,</span><span class="w"> </span><span class="mi">0x180</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="cm">/* CSR_DMWIN0(0x180): 0xa0000000-0xbfffffff-&gt;0x00000000-0x1fffffff Cached */</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="nf">li.w</span><span class="w">    </span><span class="no">$t0</span><span class="p">,</span><span class="w"> </span><span class="mi">0x80000001</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="cm">/* CSR_DMWIN1(0x181): 0x80000000-0x9fffffff-&gt;0x00000000-0x1fffffff Uncached */</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="c1"># Enable PG</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="nf">li.w</span><span class="w">    </span><span class="no">$t0</span><span class="p">,</span><span class="w"> </span><span class="mi">0xb0</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="nf">csrwr</span><span class="w">   </span><span class="no">$t0</span><span class="p">,</span><span class="w"> </span><span class="mi">0x0</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="cm">/* CSR_CRMD(0x0): PLV=0, IE=0, PG */</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="nf">la</span><span class="w">  </span><span class="no">$sp</span><span class="p">,</span><span class="w"> </span><span class="no">bootstacktop</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="nf">la</span><span class="w">  </span><span class="no">$t0</span><span class="p">,</span><span class="w"> </span><span class="no">main</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="nf">jr</span><span class="w">  </span><span class="no">$t0</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="nl">poweroff:</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">    </span><span class="nf">b</span><span class="w"> </span><span class="no">poweroff</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="nl">_stack:</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="na">.section</span><span class="w"> </span><span class="no">.data</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="w">    </span><span class="na">.global</span><span class="w"> </span><span class="no">bootstack</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="nl">bootstack:</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="w">    </span><span class="na">.space</span><span class="w"> </span><span class="mi">1024</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25"></a><span class="w">    </span><span class="na">.global</span><span class="w"> </span><span class="no">bootstacktop</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26"></a><span class="nl">bootstacktop:</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="w">    </span><span class="na">.space</span><span class="w"> </span><span class="mi">64</span>
+</code></pre></div></td></tr></table></div>
+<p>我们将这个文件保存为<code>start.S</code>。</p>
+<p>这里程序主要完成了对CSR的DMWIN的设置，并修改CSR_CRMD开启虚拟地址翻译模式，然后从栈地址直接进入到main函数。而main函数来源于外部的extern，我们接着写main对应的代码。</p>
+<h3 id="c">编写简单串口输出C程序<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<p>串口是一种通信方式。在LoongArch32的QEMU中，有一个ns16550a规格的串口，位于物理地址0x1fe001e0。</p>
+<p>该串口通过MMIO的方式访问，我们需要通过编写ns16550a对应的驱动代码完成串口的打印，这一部分感兴趣的同学可以自行上网搜索，助教已经给出一个只有输出功能的驱动范例，如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">#define UART_BASE 0x9fe001e0</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="cp">#define UART_RX     0   </span><span class="cm">/* In:  Receive buffer */</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="cp">#define UART_TX     0   </span><span class="cm">/* Out: Transmit buffer */</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="cp">#define UART_LSR    5   </span><span class="cm">/* In:  Line Status Register */</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="cp">#define UART_LSR_TEMT       0x40 </span><span class="cm">/* Transmitter empty */</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="cp">#define UART_LSR_THRE       0x20 </span><span class="cm">/* Transmit-hold-register empty */</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="cp">#define UART_LSR_DR         0x01 </span><span class="cm">/* Receiver data ready */</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">uart_put_c</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="p">((</span><span class="k">volatile</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">UART_BASE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">UART_LSR</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">UART_LSR_THRE</span><span class="p">)));</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="o">*</span><span class="p">((</span><span class="k">volatile</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">UART_BASE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">UART_TX</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="p">}</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="kt">void</span><span class="w"> </span><span class="nf">print_s</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">        </span><span class="n">uart_put_c</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">);</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="p">}</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">    </span><span class="n">print_s</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Here is my first bare-metal machine program on LoongArch32!</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>我们将这个文件保存为<code>main.c</code>。</p>
+<p>细心的同学可能会注意到，我们前文提到串口地址是在0x1fe001e0，为什么这里代码写成了0x9fe001e0呢？这是因为我们前面设置了DMW，完成了0x80000000-0x9fffffff的映射，并设置的Uncached属性。</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>如果使用Cached地址访问串口，例如对应的DMWIN0下的0xbfe001e0，尽管在QEMU中不会有任何错误，但在实际有Cache的CPU硬件上会导致串口访问失去原子性，导致无法得到串口输出。</p>
+</div>
+<h3 id="_7">编写链接脚本<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>这里我们的链接脚本需要做的事情就是指定一个起始地址，并删去程序中不需要的存储区段，因此最终产生链接脚本如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">lab0.ld</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>SECTIONS
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>{
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="hll">    . = 0xa0000000;
+</span><a id="__codelineno-4-4" name="__codelineno-4-4"></a>    .text : { *(.text) }
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>    .rodata : { *(.rodata) }
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>    .bss : { *(.bss) }
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>}
+</code></pre></div></td></tr></table></div>
+<p>然后保存为<code>lab0.ld</code>。</p>
+<p>其中，我们把开始地址放在0xa0000000是基于我们配置的DMWIN0考虑的，对于代码和数据这类访问，我们当然希望放在带有Cache属性的地址段，这样运行起来速度快一些。</p>
+<h3 id="makefile">编写Makefile<a class="headerlink" href="#makefile" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Makefile</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nv">TOOL</span><span class="w">    </span><span class="o">:=</span><span class="w">  </span>loongarch32r-linux-gnusf-
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="nv">CC</span><span class="w">      </span><span class="o">:=</span><span class="w">  </span><span class="k">$(</span>TOOL<span class="k">)</span>gcc
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="nv">OBJCOPY</span><span class="w"> </span><span class="o">:=</span><span class="w">  </span><span class="k">$(</span>TOOL<span class="k">)</span>objcopy
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="nv">OBJDUMP</span><span class="w"> </span><span class="o">:=</span><span class="w">  </span><span class="k">$(</span>TOOL<span class="k">)</span>objdump
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="nv">QEMU</span><span class="w">    </span><span class="o">:=</span><span class="w">  </span>qemu-system-loongarch32
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">clean</span> <span class="n">qemu</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="nf">start.elf</span><span class="o">:</span><span class="w"> </span><span class="n">start</span>.<span class="n">S</span> <span class="n">main</span>.<span class="n">c</span> <span class="n">lab</span>0.<span class="n">ld</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span>-nostdlib<span class="w"> </span>-T<span class="w"> </span>lab0.ld<span class="w"> </span>start.S<span class="w"> </span>main.c<span class="w"> </span>-O3<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="nf">qemu</span><span class="o">:</span><span class="w"> </span><span class="n">start</span>.<span class="n">elf</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">    </span><span class="k">$(</span>QEMU<span class="k">)</span><span class="w"> </span>-M<span class="w"> </span>ls3a5k32<span class="w"> </span>-m<span class="w"> </span>32M<span class="w"> </span>-kernel<span class="w"> </span>start.elf<span class="w"> </span>-nographic
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="nf">clean</span><span class="o">:</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">    </span>rm<span class="w"> </span>start.elf
+</code></pre></div></td></tr></table></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Makefile中命令所在的行必须以制表符（"\t"）开头，如果直接复制为空格需要手动替换为制表符，否则Make时会出现"missing separator."错误。</p>
+</div>
+<p>然后保存为<code>Makefile</code>。</p>
+<p>关于Makefile的内容大家可以上网寻找相关资料。这里编译时添加参数<code>-nostdlib</code>是为了防止stdlib编译到我们的程序中，毕竟这是一个裸机程序。</p>
+<h3 id="_8">编译运行<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>在放置了<code>start.S</code>、<code>main.c</code>、<code>lab0.ld</code>、<code>Makefile</code>的文件夹下执行<code>make qemu</code>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>➜<span class="w">  </span>make<span class="w"> </span>qemu<span class="w"> </span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>qemu-system-loongarch32<span class="w"> </span>-M<span class="w"> </span>ls3a5k32<span class="w"> </span>-m<span class="w"> </span>32M<span class="w"> </span>-kernel<span class="w"> </span>start.elf<span class="w"> </span>-nographic
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>loongson32_init:<span class="w"> </span>num_nodes<span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>loongson32_init:<span class="w"> </span>node<span class="w"> </span><span class="m">0</span><span class="w"> </span>mem<span class="w"> </span>0x2000000
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll">Here<span class="w"> </span>is<span class="w"> </span>my<span class="w"> </span>first<span class="w"> </span>bare-metal<span class="w"> </span>machine<span class="w"> </span>program<span class="w"> </span>on<span class="w"> </span>LoongArch32!
+</span></code></pre></div>
+<p>看到"Here is my first bare-metal machine program on LoongArch32!"表示我们的裸机程序运行成功！</p>
+<h3 id="qemu">退出QEMU<a class="headerlink" href="#qemu" title="Permanent link">&para;</a></h3>
+<p>在nographic模式下，可以按 <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-a">A</kbd></span> 一次，然后按 <span class="keys"><kbd class="key-x">X</kbd></span> 退出。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>小思考：</p>
+<ol>
+<li>
+<p>为什么在start.S的最后写了个死循环，如果不写会有什么坏处？</p>
+</li>
+<li>
+<p>在QEMU模拟器中运行裸机程序有什么办法避免CPU满载？（可以阅读实验一的代码找到答案。）</p>
+</li>
+</ol>
+</div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年5月14日</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../setup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 搭建实验环境" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              搭建实验环境
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../task/" class="md-footer__link md-footer__link--next" aria-label="Next: 实验任务" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              实验任务
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 College of Computer Science, Chongqing University.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      
+    
+  </body>
+</html>

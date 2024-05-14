@@ -1,0 +1,1663 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
+    
+    
+      
+        <title>背景介绍 - 操作系统实验文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="操作系统实验文档" class="md-header__button md-logo" aria-label="操作系统实验文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            操作系统实验文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              背景介绍
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cyyself/osexp-docs-cqu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    osexp-docs-cqu
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      主页
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        实验零-裸机程序
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab1/getcode/" class="md-tabs__link">
+        实验一-异常与中断
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab2/intro/" class="md-tabs__link">
+        实验二-内存管理
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab3/intro/" class="md-tabs__link">
+        实验三-进程管理
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab4/intro/" class="md-tabs__link">
+        实验四-文件系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../chiplab/n4ddr/" class="md-tabs__link">
+        开发板运行
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../faq/env/" class="md-tabs__link">
+        常见问题
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="操作系统实验文档" class="md-nav__button md-logo" aria-label="操作系统实验文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    操作系统实验文档
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cyyself/osexp-docs-cqu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    osexp-docs-cqu
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          实验零-裸机程序
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验零-裸机程序" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          实验零-裸机程序
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          背景介绍
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        背景介绍
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    开篇
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loongarch32" class="md-nav__link">
+    LoongArch32简介
+  </a>
+  
+    <nav class="md-nav" aria-label="LoongArch32简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    通用寄存器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基本整数指令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marco" class="md-nav__link">
+    marco指令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loongarch32_1" class="md-nav__link">
+    LoongArch32拿来做操作系统实验有什么好处？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loongarch32x86armrisc-v" class="md-nav__link">
+    LoongArch32与x86、ARM、RISC-V在内存管理上的区别
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    控制状态寄存器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    I/O与地址空间
+  </a>
+  
+    <nav class="md-nav" aria-label="I/O与地址空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#io_1" class="md-nav__link">
+    I/O简介
+  </a>
+  
+    <nav class="md-nav" aria-label="I/O简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pmio-port-mapped-io" class="md-nav__link">
+    PMIO (Port-Mapped I/O)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mmio-memory-mapped-io" class="md-nav__link">
+    MMIO (Memory-Mapped I/O)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dma-direct-memory-access" class="md-nav__link">
+    DMA  (Direct Memory Access)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    操作系统如何知道这台计算机上有哪些设备？
+  </a>
+  
+    <nav class="md-nav" aria-label="操作系统如何知道这台计算机上有哪些设备？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e820acpi" class="md-nav__link">
+    e820与ACPI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    设备树
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    还可以选择不探测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    虚拟地址管理
+  </a>
+  
+    <nav class="md-nav" aria-label="虚拟地址管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dmw" class="md-nav__link">
+    DMW
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlb" class="md-nav__link">
+    TLB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dmw_1" class="md-nav__link">
+    如何配置DMW？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qemu" class="md-nav__link">
+    QEMU简介
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        搭建实验环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bare-prog/" class="md-nav__link">
+        编写裸机程序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          实验一-异常与中断
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验一-异常与中断" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          实验一-异常与中断
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/getcode/" class="md-nav__link">
+        获取实验资料
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/code/" class="md-nav__link">
+        代码讲解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/step/" class="md-nav__link">
+        实验步骤
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          实验二-内存管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验二-内存管理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          实验二-内存管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/code/" class="md-nav__link">
+        代码讲解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/step/" class="md-nav__link">
+        实验步骤
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          实验三-进程管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验三-进程管理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          实验三-进程管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/goal/" class="md-nav__link">
+        实验目的
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/method/" class="md-nav__link">
+        编译方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          实验四-文件系统
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验四-文件系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          实验四-文件系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/goals/" class="md-nav__link">
+        实验目的
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/compile/" class="md-nav__link">
+        编译方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/tasks/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          开发板运行
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发板运行" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          开发板运行
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chiplab/n4ddr/" class="md-nav__link">
+        Nexys 4 DDR
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          常见问题
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="常见问题" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          常见问题
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/env/" class="md-nav__link">
+        环境搭建
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    开篇
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loongarch32" class="md-nav__link">
+    LoongArch32简介
+  </a>
+  
+    <nav class="md-nav" aria-label="LoongArch32简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    通用寄存器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基本整数指令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marco" class="md-nav__link">
+    marco指令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loongarch32_1" class="md-nav__link">
+    LoongArch32拿来做操作系统实验有什么好处？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loongarch32x86armrisc-v" class="md-nav__link">
+    LoongArch32与x86、ARM、RISC-V在内存管理上的区别
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    控制状态寄存器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    I/O与地址空间
+  </a>
+  
+    <nav class="md-nav" aria-label="I/O与地址空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#io_1" class="md-nav__link">
+    I/O简介
+  </a>
+  
+    <nav class="md-nav" aria-label="I/O简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pmio-port-mapped-io" class="md-nav__link">
+    PMIO (Port-Mapped I/O)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mmio-memory-mapped-io" class="md-nav__link">
+    MMIO (Memory-Mapped I/O)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dma-direct-memory-access" class="md-nav__link">
+    DMA  (Direct Memory Access)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    操作系统如何知道这台计算机上有哪些设备？
+  </a>
+  
+    <nav class="md-nav" aria-label="操作系统如何知道这台计算机上有哪些设备？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e820acpi" class="md-nav__link">
+    e820与ACPI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    设备树
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    还可以选择不探测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    虚拟地址管理
+  </a>
+  
+    <nav class="md-nav" aria-label="虚拟地址管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dmw" class="md-nav__link">
+    DMW
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlb" class="md-nav__link">
+    TLB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dmw_1" class="md-nav__link">
+    如何配置DMW？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qemu" class="md-nav__link">
+    QEMU简介
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/cyyself/osexp-docs-cqu/edit/master/docs/lab0/intro.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>背景介绍</h1>
+
+<h2 id="_1">开篇<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>相信大家通过“计算机组成原理”这门课程已经对计算机如何计算以及执行指令有了一定的了解。</p>
+<p>但我们计算机的处理器除了简单地执行指令之外，它还拥有特权级管理、异常与中断等功能，这些硬件功能与操作系统软件密切相关。</p>
+<p>相信大家在通过本实验的学习后，能够对计算机的启动流程以及操作系统的运行流程有一个基本的认识，解开大家心中计算机底层的神秘面纱。</p>
+<h2 id="loongarch32">LoongArch32简介<a class="headerlink" href="#loongarch32" title="Permanent link">&para;</a></h2>
+<p>LoongArch是一种精简指令集架构。分为32位与64位两个版本。我们操作系统实验采用的是32位版本。</p>
+<h3 id="_2">通用寄存器<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>LoongArch32有32个通用寄存器，记为r0~r31，这些寄存器在<a href="https://loongson.github.io/LoongArch-Documentation/LoongArch-ELF-ABI-CN.html">ABI</a>中定义了对应的别名，如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">别名</th>
+<th align="center">用途</th>
+<th align="center">在调用中是否保留</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>$r0</code></td>
+<td align="left"><code>$zero</code></td>
+<td align="center">常数 <code>0</code></td>
+<td align="center">（常数）</td>
+</tr>
+<tr>
+<td align="left"><code>$r1</code></td>
+<td align="left"><code>$ra</code></td>
+<td align="center">返回地址</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="left"><code>$r2</code></td>
+<td align="left"><code>$tp</code></td>
+<td align="center">线程指针</td>
+<td align="center">（不可分配）</td>
+</tr>
+<tr>
+<td align="left"><code>$r3</code></td>
+<td align="left"><code>$sp</code></td>
+<td align="center">栈指针</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="left"><code>$r4</code> - <code>$r5</code></td>
+<td align="left"><code>$a0</code> - <code>$a1</code></td>
+<td align="center">传参寄存器、返回值寄存器</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="left"><code>$r6</code> - <code>$r11</code></td>
+<td align="left"><code>$a2</code> - <code>$a7</code></td>
+<td align="center">传参寄存器</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="left"><code>$r12</code> - <code>$r20</code></td>
+<td align="left"><code>$t0</code> - <code>$t8</code></td>
+<td align="center">临时寄存器</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="left"><code>$r21</code></td>
+<td align="left"></td>
+<td align="center">保留</td>
+<td align="center">（不可分配）</td>
+</tr>
+<tr>
+<td align="left"><code>$r22</code></td>
+<td align="left"><code>$fp</code> / <code>$s9</code></td>
+<td align="center">栈帧指针 / 静态寄存器</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="left"><code>$r23</code> - <code>$r31</code></td>
+<td align="left"><code>$s0</code> - <code>$s8</code></td>
+<td align="center">静态寄存器</td>
+<td align="center">是</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注：LoongArch32老版本ABI中存在与<code>v0</code>、<code>v1</code>寄存器，与<code>a0</code>、<code>a1</code>同为<code>$r4</code>与<code>$r5</code>寄存器的别名，在新版ABI中已被舍弃。</strong></p>
+<h3 id="_3">基本整数指令<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>这一部分请同学们自行参考<a href="https://mirrors.tuna.tsinghua.edu.cn/loongson/docs/loongarch/%E9%BE%99%E8%8A%AF%E6%9E%B6%E6%9E%8432%E4%BD%8D%E7%B2%BE%E7%AE%80%E7%89%88%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_v1.02.pdf">龙芯架构32位精简版参考手册_v1.02.pdf</a>。</p>
+<h3 id="marco">marco指令<a class="headerlink" href="#marco" title="Permanent link">&para;</a></h3>
+<p>marco指令是我们编写汇编时涉及到的一种特殊指令，它本身不定义在ISA中。这些marco指令定义出来后会在汇编器翻译成其他一条或多条真实存在的指令，而它存在的意义是为了让我们编写汇编代码时能够更加方便。</p>
+<p>在我们移植的uCore for LoongArch32中，只用到了一种marco指令，就是<code>li.w</code>。因为LoongArch32不支持32位的立即数，我们需要通过多条指令拼凑出一个32位的立即数，这样就可以用<code>li.w</code>直接帮我们拼接，最终生成出来的是<code>lu12i.w</code>与一条<code>ori</code>指令共同完成li.w的操作。</p>
+<p>由于助教暂未找到龙芯相关文档的说明，可以通过阅读汇编器的指令定义代码手动逆向marco指令：<a href="https://gitee.com/loongson-edu/la32r_binutils/blob/master/opcodes/loongarch-opc.c">https://gitee.com/loongson-edu/la32r_binutils/blob/master/opcodes/loongarch-opc.c</a></p>
+<p>如果有兴趣的同学想知道这些opcodes如何定义，可以<a href="https://blog.cyyself.name/add-compile-instr-for-riscv/">参考助教的博客</a>，曾经做过RISC-V上添加指令的工作。</p>
+<h3 id="loongarch32_1">LoongArch32拿来做操作系统实验有什么好处？<a class="headerlink" href="#loongarch32_1" title="Permanent link">&para;</a></h3>
+<p>快速上手容易，与MIPS非常相似，简单易懂。且具有中文文档。</p>
+<p>相比x86，历史包袱轻，不需要了解各种PIO相关寄存器的设置以及分段管理。</p>
+<p>相比RISC-V，带MMU的操作系统直接运行在最高特权级，不需要了解SBI以及Supervisor特权级等一系列内容。</p>
+<h3 id="loongarch32x86armrisc-v">LoongArch32与x86、ARM、RISC-V在内存管理上的区别<a class="headerlink" href="#loongarch32x86armrisc-v" title="Permanent link">&para;</a></h3>
+<p>它的虚拟内存管理采用 <strong>软件控制TLB</strong> ，与MIPS类似，当TLB查找失败或TLB查找成功但有效位为0时，产生对应的TLB异常，跳转到异常处理地址进行处理。</p>
+<p>而x86、ARM、RISC-V都是采用硬件遍历页表方式，软件只需要将页表基地址通过一个CSR告知硬件（如x86上的CR3、RISC-V上的satp），硬件完成TLB填充。只有当页表遍历发现页面无效时才产生缺页异常，跳转到异常处理地址进行处理。</p>
+<p>因此，在LoongArch32与MIPS一样 <strong>没有缺页异常</strong> ，其缺页异常包含在TLB异常中，由操作系统判断是否是缺页。</p>
+<p>在x86、ARM、RISC-V上 <strong>没有TLB异常</strong>。</p>
+<h2 id="_4">控制状态寄存器<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>我们也许知道CPU上有一些通用寄存器，甚至有一些同学能非常熟悉他们的名字，例如x86-64上的RAX、RSP、RBP等，ARM/MIPS/RISC-V上的32个通用寄存器，以及各自的别名，如a0、a1、sp、ra等。</p>
+<p>但我们的CPU上，还有一种特殊的寄存器，它称为控制状态寄存器（Control/Status Registers，CSR），它对计算机的系统状态与控制进行管理。并通过CSR指令对他们进行读写，在修改后，计算机的运行状态也就随之改变。</p>
+<p>例如，在LoongArch32架构中，有两种特权级，PLV0（俗称内核态）与PLV3（俗称用户态）。类似于x86架构上的Ring0与Ring3。也类似ARM上的EL0与EL3，以及RISC-V架构中的Machine与User。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>小思考：操作系统一定运行在最高特权级吗？如果在操作系统之上还有一层特权级会带来什么好处？</p>
+<p>感兴趣的同学可以了解RISC-V架构中的Supervisor特权级以及各个指令集架构的虚拟化机制。</p>
+</div>
+<p>在本次实验中，我们会涉及到CSR的<code>CRMD</code>状态修改、<code>DMW0</code>与<code>DMW1</code>的配置。关于这里的寄存器各位域的具体含义以及配置方式，需要大家自行阅读<a href="https://mirrors.tuna.tsinghua.edu.cn/loongson/docs/loongarch/%E9%BE%99%E8%8A%AF%E6%9E%B6%E6%9E%8432%E4%BD%8D%E7%B2%BE%E7%AE%80%E7%89%88%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_v1.02.pdf">龙芯架构32位精简版参考手册_v1.02.pdf</a>完成。</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>请大家自行阅读<a href="https://mirrors.tuna.tsinghua.edu.cn/loongson/docs/loongarch/%E9%BE%99%E8%8A%AF%E6%9E%B6%E6%9E%8432%E4%BD%8D%E7%B2%BE%E7%AE%80%E7%89%88%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_v1.02.pdf">龙芯架构32位精简版参考手册_v1.02.pdf</a>中的P55, 了解CRMD后，再继续了解后续内容。</p>
+<p>关于DMW寄存器的部分可以暂时跳过，我们会在后文中介绍，可届时再回过头来看DMW的寄存器。</p>
+</div>
+<h2 id="io">I/O与地址空间<a class="headerlink" href="#io" title="Permanent link">&para;</a></h2>
+<h3 id="io_1">I/O简介<a class="headerlink" href="#io_1" title="Permanent link">&para;</a></h3>
+<p>许多同学也许会好奇，当我们的计算机连接上一个外设时，计算机是怎么发现这些外设的连接？外设与我们的计算机是怎么交互的呢？</p>
+<p>这里就需要涉及到I/O的概念。</p>
+<p>在我们的计算机中，I/O方式通常可分为3种：</p>
+<h4 id="pmio-port-mapped-io">PMIO (Port-Mapped I/O)<a class="headerlink" href="#pmio-port-mapped-io" title="Permanent link">&para;</a></h4>
+<p>这是一种非常特殊的I/O，在LoongArch32、RISC-V、ARM、MIPS中 <strong>均不存在</strong> 。</p>
+<p>在x86（含x86-64）架构中，有一个与内存独立的I/O地址空间，使用<code>in[blw]</code>与<code>out[blw]</code>指令，完成I/O地址与GPR（通用寄存器）间的数据移动。</p>
+<h4 id="mmio-memory-mapped-io">MMIO (Memory-Mapped I/O)<a class="headerlink" href="#mmio-memory-mapped-io" title="Permanent link">&para;</a></h4>
+<p>内存映射I/O就是将I/O设备映射到物理内存地址空间中，像读写内存一样访问I/O设备。</p>
+<p>这种方式对于软件而言非常方便，仅需要用一个指针指向对应的MMIO设备上的地址，并了解读写MMIO设备地址的具体含义即可完成IO操作。</p>
+<p>例如我们实验中涉及到的UART串口就采用这种方式进行IO交互。</p>
+<h4 id="dma-direct-memory-access">DMA  (Direct Memory Access)<a class="headerlink" href="#dma-direct-memory-access" title="Permanent link">&para;</a></h4>
+<p>尽管MMIO很方便，但它的数据搬运需要CPU参与，效率较低。</p>
+<p>对于一次访问大量数据的情况，我们可以让设备直接读写内存，避免经过CPU影响效率。</p>
+<p>现在计算机的高速IO，例如网卡、硬盘控制器、GPU，都使用DMA技术将数据缓冲区直接放置于内存，避免大量数据传输时需要大量MMIO访问。</p>
+<p>这里需要提醒同学们注意的是，DMA访问通常与其他IO方式以及中断配合使用。其他IO方式用于进行DMA传输的控制，中断用于通知DMA状态改变，例如有新数据已经完成写入内存或者缓冲区已经发到对应的设备。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>小思考：</p>
+<ol>
+<li>
+<p>如果CPU有Cache，对外设的MMIO访问能不能经过Cache呢？为什么？</p>
+</li>
+<li>
+<p>如果CPU为乱序多发射架构，对外设的MMIO访问能否乱序发出呢？</p>
+</li>
+<li>
+<p>除了插入内存屏障指令外，各个指令集架构还提供了什么配置使得使用虚拟地址进行MMIO访问时CPU一定能确保顺序执行？</p>
+</li>
+<li>
+<p>如果CPU有Cache，DMA操作不经过Cache直接读写内存产生了Cache的数据与内存不一致怎么办？支持DMA一致性的CPU与不支持DMA一致性的CPU分别怎么做？</p>
+</li>
+<li>
+<p>在C语言中完成MMIO访问时，为什么通常会对指向要访问的数据的指针加上 <strong>volatile</strong> 关键字，它会如何影响编译器行为？（同学们可以试试看简单写一个连续进行MMIO访问的裸机程序，并在编译时开启O2优化，观察生成汇编的变化。）</p>
+</li>
+<li>
+<p>既然访问的数据终究是要被使用的，那么均摊时间来说DMA的优势在哪里呢？（提示：可以了解单次Uncached访问延迟，以及后续体系架构课Cache实验中的总线突发传输，SIMD指令，软件上对数据的零拷贝处理，或许能够解答同学们的疑惑。）</p>
+</li>
+</ol>
+</div>
+<h3 id="_5">操作系统如何知道这台计算机上有哪些设备？<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h4 id="e820acpi">e820与ACPI<a class="headerlink" href="#e820acpi" title="Permanent link">&para;</a></h4>
+<p>在x86计算机中，BIOS提供了一个e820内存管理器，并通过中断指令（x86上的int）调用BIOS完成物理内存地址的探测。</p>
+<p>有在x86计算机上使用Linux的同学们，可以通过dmesg命令查看内核的输出，在内核启动时可以找到BIOS提供的e820内存映射表，且如果同学们的计算机采用核心显卡，往往会看到数百兆甚至数GB的内存带上了reserved标记，这是因为核心显卡会占用一部分内存。但这里还要提醒同学们，如果你使用虚拟机的话，看的就是你虚拟机的e820而不是真实计算机BIOS汇报的e820了。</p>
+<p>ACPI（Advanced Configuration and Power Interface）是上个世纪90年代产生的一种开放标准，它定义了系统固件与操作系统之间的硬件抽象接口。x86计算机上的操作系统就可以利用ACPI对固件函数进行调用，获取系统上的内存布局、各设备所处的位置和设备型号等，就实现了同一个操作系统的二进制文件能够兼容多种不同的计算机。</p>
+<h4 id="_6">设备树<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>自己给一些嵌入式开发板编译过系统软件的同学一定对设备树不陌生。</p>
+<p>在这些没有ACPI机制的平台上，通常采用一种叫做设备树的脚本来描述计算机硬件上各个设备。该设备树通常会放置于Bootloader中通过参数传递给系统内核，也可能直接内嵌与系统内核中，想要知道设备树是个什么文件的同学可以翻看Linux内核源代码的<code>arch/*/boot/dts</code>文件夹。</p>
+<p>而对于一些即插即用的设备，例如USB与PCI-E，设备树通常仅提供其控制器本身的描述，这些即插即用设备的具体探测交给控制器驱动来完成。</p>
+<h4 id="_7">还可以选择不探测<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p>在LoongArch32的uCore移植中，为了简化操作系统，我们没有使用任何设备探测的方法。毕竟没有ACPI，也没有Bootloader传递设备树，即使有传递设备树也需要一部分解析设备树的代码，会增加系统的复杂程度。</p>
+<p>对于内存大小，由于LoongArch32下可用物理内存范围是从0开始连续的，因此我们可以直接设定一个固定值32M，直接使用即可。</p>
+<p>而对于IO外设，在uCore中仅使用串口，且它的MMIO地址以及中断服务号在我们使用的QEMU与Chiplab FPGA软核SoC环境中都是固定的，因此也将该地址固定了，直接使用即可。</p>
+<h2 id="_8">虚拟地址管理<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>LoongArch32的虚拟地址映射有两种方式，一种是DMW，一种是TLB。DMW的查找优先于TLB的查找，当两者均查找失败时产生TLB REFILL例外（异常）。</p>
+<h3 id="dmw">DMW<a class="headerlink" href="#dmw" title="Permanent link">&para;</a></h3>
+<p>LoongArch32有一种特殊的虚拟地址映射方式，称为直接映射配置窗口（DMW）。它可以提供虚拟地址<code>[31:29]</code>部分到物理地址<code>[31:29]</code>的映射配置。并可以在地址映射窗口中设置允许访问该窗口的特权级以及Cache属性。</p>
+<p>详细信息请同学们参考<a href="https://mirrors.tuna.tsinghua.edu.cn/loongson/docs/loongarch/%E9%BE%99%E8%8A%AF%E6%9E%B6%E6%9E%8432%E4%BD%8D%E7%B2%BE%E7%AE%80%E7%89%88%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_v1.02.pdf">龙芯架构32位精简版参考手册_v1.02.pdf</a>中的P43。</p>
+<h3 id="tlb">TLB<a class="headerlink" href="#tlb" title="Permanent link">&para;</a></h3>
+<p>大家应该在计算机组成原理课程时已经对TLB有一个初步的了解，它是一个虚拟地址翻译的缓冲区，储存了最近使用的一部分虚拟地址到物理地址的映射关系，并记录了对应虚拟页面的元数据，例如权限配置与Cache属性等。</p>
+<p>也许有的同学会想，为什么需要TLB而不是每次访问页表加上Page Table Cache呢？这是因为多级格式遍历时需要逐层访问多个地址并不适合处理器单个周期访问，因为硬件上将页表遍历的结果放在一个缓冲区中，这个缓冲区就是TLB。</p>
+<p>不同于x86、ARM、RISC-V等架构，由硬件遍历页表填充TLB，并提供页表基地址等寄存器由软件配置当前处理器遍历的页表。LoongArch32采用了与MIPS相同的软件控制TLB的地址翻译模式，详细信息请同学们参考<a href="https://mirrors.tuna.tsinghua.edu.cn/loongson/docs/loongarch/%E9%BE%99%E8%8A%AF%E6%9E%B6%E6%9E%8432%E4%BD%8D%E7%B2%BE%E7%AE%80%E7%89%88%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_v1.02.pdf">龙芯架构32位精简版参考手册_v1.02.pdf</a>中的P55。</p>
+<p>本次实验中暂不涉及TLB，大家只需要了解它的存在即可。</p>
+<h3 id="dmw_1">如何配置DMW？<a class="headerlink" href="#dmw_1" title="Permanent link">&para;</a></h3>
+<p>对于大多数指令集架构而言（我们熟悉的MIPS是个有固定虚拟地址映射的特例），在计算机上电启动时，软件运行在物理地址空间中。真实硬件上通常会在上电启动时从第一级Bootloader开始执行完成系统的初始化，再逐级载入更高级的Bootloader以至于最后启动操作系统。而具体从哪一级开始使用虚拟地址取决于各架构以及系统软件。对于我们本次实验使用的LoongArch32架构而言，在QEMU上运行时是在uCore操作系统启动时，由操作系统配置DMW窗口并修改CSR.CRMD寄存器开始开启虚拟地址映射的。而如果是使用Chiplab软核，它的第一级Bootloader是PMON，在PMON中就会设置DMW并开启虚拟地址映射。</p>
+<p>在uCore中，会配置两个DMW窗口，分别用于内核普通的DRAM访问与IO外设访问，如下：</p>
+<table>
+<thead>
+<tr>
+<th>DMW编号</th>
+<th>MAT（存储访问类型）</th>
+<th>PLV0</th>
+<th>PLV3</th>
+<th>PSEG</th>
+<th>VSEG</th>
+<th>VSEG范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DMW0</td>
+<td>1（一致可缓存）</td>
+<td>1</td>
+<td>0</td>
+<td>0b000 (0x00000000-0x1fffffff)</td>
+<td>0b101</td>
+<td><code>0xa0000000-0xbfffffff</code></td>
+</tr>
+<tr>
+<td>DMW1</td>
+<td>0（强序非缓存）</td>
+<td>1</td>
+<td>0</td>
+<td>0b000 (0x00000000-0x1fffffff)</td>
+<td>0b100</td>
+<td><code>0x80000000-0x9fffffff</code></td>
+</tr>
+</tbody>
+</table>
+<p>这里需要注意的是，如果是从QEMU模拟器启动操作系统，DMW我们可以自定义，但如果是从Chiplab的FPGA软核上使用PMON启动操作系统，由于PMON本身已经进行DMW的配置并运行在虚拟地址，因此我们的DMW配置必须与PMON一致才能保证系统正常启动。</p>
+<p>特别需要注意的是，LoongArch32的QEMU有一个特点是它会在直接地址翻译模式下去除物理地址的高3位，以确保没有配置DMW时能够正确启动系统软件，但真实的LoongArch32硬件（如Chiplab软核）不会这么做。因此大家在编写系统软件的时候需要注意这个特征，编写那些运行在直接地址翻译模式的代码时需要确保取指地址和访存地址均为物理地址，若无法保证则可以做一层跳转（参考uCore处理TLBREFILL的代码），切换为映射地址翻译模式再进行下一步操作，防止编写的操作系统在QEMU上能运行但无法在真实硬件上运行。</p>
+<h2 id="qemu">QEMU简介<a class="headerlink" href="#qemu" title="Permanent link">&para;</a></h2>
+<p>QEMU是一款模拟器（虚拟机），支持多种指令集架构。我们实验中使用的是LoongArch32架构的QEMU。</p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年5月14日</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: 主页" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              主页
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../setup/" class="md-footer__link md-footer__link--next" aria-label="Next: 搭建实验环境" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              搭建实验环境
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 College of Computer Science, Chongqing University.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      
+    
+  </body>
+</html>

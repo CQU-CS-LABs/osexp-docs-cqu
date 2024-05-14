@@ -1,0 +1,1410 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
+    
+    
+      
+        <title>背景介绍 - 操作系统实验文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="操作系统实验文档" class="md-header__button md-logo" aria-label="操作系统实验文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            操作系统实验文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              背景介绍
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cyyself/osexp-docs-cqu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    osexp-docs-cqu
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      主页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab0/intro/" class="md-tabs__link">
+        实验零-裸机程序
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getcode/" class="md-tabs__link md-tabs__link--active">
+        实验一-异常与中断
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab2/intro/" class="md-tabs__link">
+        实验二-内存管理
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab3/intro/" class="md-tabs__link">
+        实验三-进程管理
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lab4/intro/" class="md-tabs__link">
+        实验四-文件系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../chiplab/n4ddr/" class="md-tabs__link">
+        开发板运行
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../faq/env/" class="md-tabs__link">
+        常见问题
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="操作系统实验文档" class="md-nav__button md-logo" aria-label="操作系统实验文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    操作系统实验文档
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cyyself/osexp-docs-cqu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    osexp-docs-cqu
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          实验零-裸机程序
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验零-裸机程序" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          实验零-裸机程序
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab0/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab0/setup/" class="md-nav__link">
+        搭建实验环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab0/bare-prog/" class="md-nav__link">
+        编写裸机程序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab0/task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          实验一-异常与中断
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验一-异常与中断" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          实验一-异常与中断
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getcode/" class="md-nav__link">
+        获取实验资料
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          背景介绍
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        背景介绍
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    背景
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bios" class="md-nav__link">
+    BIOS启动过程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    操作系统启动过程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    地址空间
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    中断与异常
+  </a>
+  
+    <nav class="md-nav" aria-label="中断与异常">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    时钟中断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    串口中断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    例外产生
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    操作系统响应异常
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    例外处理返回
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code/" class="md-nav__link">
+        代码讲解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../step/" class="md-nav__link">
+        实验步骤
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          实验二-内存管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验二-内存管理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          实验二-内存管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/code/" class="md-nav__link">
+        代码讲解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/step/" class="md-nav__link">
+        实验步骤
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          实验三-进程管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验三-进程管理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          实验三-进程管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/goal/" class="md-nav__link">
+        实验目的
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/method/" class="md-nav__link">
+        编译方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab3/task/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          实验四-文件系统
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验四-文件系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          实验四-文件系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/intro/" class="md-nav__link">
+        背景介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/goals/" class="md-nav__link">
+        实验目的
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/compile/" class="md-nav__link">
+        编译方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/tasks/" class="md-nav__link">
+        实验任务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          开发板运行
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发板运行" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          开发板运行
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chiplab/n4ddr/" class="md-nav__link">
+        Nexys 4 DDR
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          常见问题
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="常见问题" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          常见问题
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/env/" class="md-nav__link">
+        环境搭建
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    背景
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bios" class="md-nav__link">
+    BIOS启动过程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    操作系统启动过程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    地址空间
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    中断与异常
+  </a>
+  
+    <nav class="md-nav" aria-label="中断与异常">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    时钟中断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    串口中断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    例外产生
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    操作系统响应异常
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    例外处理返回
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/cyyself/osexp-docs-cqu/edit/master/docs/lab1/intro.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>背景介绍</h1>
+
+<h3 id="_1">背景<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>操作系统是一个软件，也需要通过某种机制加载并运行它。对于LoongArch32的计算机来说，上电复位最初启动的是一个BIOS软件（例如PMON），该BIOS软件能够支持从网络加载ELF格式的操作系统内核，从而开始启动我们已经编译好的uCore内核。</p>
+<p>而对于QEMU虚拟机而言，我们可以直接使用<code>-kernel</code>来指定我们需要加载的内核的ELF文件，从而直接完成了内核的载入过程，并直接从ELF的入口点开始启动。</p>
+<h3 id="bios">BIOS启动过程<a class="headerlink" href="#bios" title="Permanent link">&para;</a></h3>
+<p>当计算机加电后，一般不直接执行操作系统，而是执行系统初始化软件完成基本IO初始化和引导加载功能。简单地说，系统初始化软件就是在操作系统内核运行之前运行的一段小软件。通过这段小软件，我们可以初始化硬件设备、建立系统的内存空间映射图，从而将系统的软硬件环境带到一个合适的状态，以便为最终调用操作系统内核准备好正确的环境。最终引导加载程序把操作系统内核映像加载到RAM中，并将系统控制权传递给它。</p>
+<p>对于绝大多数计算机系统而言，操作系统和应用软件是存放在磁盘（硬盘/软盘）、光盘、EPROM、ROM、Flash等可在掉电后继续保存数据的存储介质上。计算机启动后，CPU一开始会到一个特定的地址开始执行指令，这个特定的地址存放了系统初始化软件，负责完成计算机基本的IO初始化，这是系统加电后运行的第一段软件代码。</p>
+<p>对于LoongArch32体系结构而言，真实的硬件上电后会开始启动BIOS，该BIOS可以被自己刷写。而在<a href="https://gitee.com/loongson-edu/chiplab">ChipLab教学计算机</a>中采用的是PMON2000作为BIOS，它具有网络功能，可以通过网卡从网络上使用tftp协议载入ELF格式的操作系统内核加载到内存，然后从ELF的入口点启动。</p>
+<p>而我们实验采用的QEMU环境，则是抛弃了BIOS这一过程。在QEMU上直接使用<code>-kernel</code>参数指定内核的ELF文件，本质上就是完成了BIOS所做的加载内核的过程，直接从ELF文件的入口点开始启动操作系统。</p>
+<h3 id="_2">操作系统启动过程<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>当bootloader通过把ucore在系统加载到内存后，就转跳到ucore操作系统在内存中的入口位置（kern/start.S中的start的地址），这样ucore就接管了整个控制权。当前的ucore功能很简单，只完成基本的内存管理和外设中断管理。ucore主要完成的工作包括：</p>
+<ul>
+<li>配置DMW，使得操作系统拥有可用的地址空间（位于<code>kern/init/entry.S</code>，其它部分均为C语言程序，整体位于<code>kern/init/init.c</code>）</li>
+<li>初始化终端；</li>
+<li>显示字符串；</li>
+<li>设置例外两个例外向量；</li>
+<li>执行while（1）死循环。</li>
+</ul>
+<p>以后的实验中会大量涉及各个函数直接的调用关系，以及由于中断处理导致的异步现象，可能对大家实现操作系统和改正其中的错误有很大影响。而理解好函数调用关系的建立机制和中断处理机制，对后续实验会有很大帮助。</p>
+<h3 id="_3">地址空间<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>uCore中的地址空间涉及两种地址：</p>
+<ul>
+<li>
+<p>逻辑地址（Logical Address,应用程序员看到的地址，在操作系统原理上称为虚拟地址，以后提到虚拟地址就是指逻辑地址）</p>
+</li>
+<li>
+<p>物理地址（Physical Address, 实际的物理内存地址）。</p>
+</li>
+</ul>
+<p>(1) 逻辑地址空间</p>
+<p>从应用程序的角度看，逻辑地址空间就是应用程序员编程所用到的地址空间，比如下面的程序片段：</p>
+<p>int val=100;</p>
+<p>int * point=&val;</p>
+<p>其中指针变量point中存储的即是一个逻辑地址。</p>
+<p>(2) 物理地址空间</p>
+<p>从操作系统的角度看，CPU、内存硬件（通常说的“内存条”）和各种外设是它主要管理的硬件资源而内存硬件和外设分布在物理地址空间中。物理地址空间就是一个“大数组”，CPU通过索引（物理地址）来访问这个“大数组”中的内容。物理地址是指CPU提交到内存总线上用于访问计算机内存和外设的最终地址。</p>
+<p>物理地址空间的大小取决于CPU实现的物理地址位数，LoongArch32计算机中，CPU的物理地址空间取决于处理器配置的PALEN。而对于外设，则是固定配置于0x1f000000~0x1fffffff。例如我们如果配置QEMU的内存为256M，那么物理地址空间如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>    +------------------+  &lt;- 0xFFFFFFFF (4GB)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    |     无效空间      |
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    +------------------+  &lt;- 0x1FFFFFFF (512M)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    |   IO外设地址空间   |
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    +------------------+  &lt;- 0x1F000000 (496M)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    |     无效空间      |
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    +------------------+  &lt;- 0x0FFFFFFF (256M)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    |     有效内存      |
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    +------------------+  &lt;- 0x00000000
+</code></pre></div>
+<h3 id="_4">中断与异常<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>操作系统需要对计算机系统中的各种外设进行管理，这就需要CPU和外设能够相互通信才行。一般外设的速度远慢于CPU的速度。如果让操作系统通过CPU“主动关心”外设的事件，即采用通常的轮询(polling)机制，则太浪费CPU资源了。所以需要操作系统和CPU能够一起提供某种机制，让外设在需要操作系统处理外设相关事件的时候，能够“主动通知”操作系统，即打断操作系统和应用的正常执行，让操作系统完成外设的相关处理，然后再恢复操作系统和应用的正常执行。在操作系统中，这种机制称为中断机制。中断机制给操作系统提供了处理意外情况的能力，同时它也是实现进程/线程抢占式调度的一个重要基石。但中断的引入会导致对操作系统的理解更加困难。</p>
+<p>在LoongArch32架构中，中断属于异常(Exception)的一种，uCore内核目前处理的异常包括以下类型：</p>
+<ul>
+<li>
+<p>中断          (EX_IRQ,CSR.ESTAT.Ecode=0)</p>
+</li>
+<li>
+<p>Load操作页无效 (EX_TLBL,CSR.ESTAT.Ecode=1)</p>
+</li>
+<li>
+<p>Store操作页无效(EX_TLBS,CSR.ESTAT.Ecode=2)</p>
+</li>
+<li>
+<p>TLB 重填      (EX_TLBR,CSR.ESTAT.Ecode=31)</p>
+</li>
+<li>
+<p>指令不存在     (EX_RI,CSR.ESTAT.Ecode=13)</p>
+</li>
+<li>
+<p>指令特权等级错误(EX_IPE,CSR.ESTAT.Ecode=14)</p>
+</li>
+<li>
+<p>系统调用       (EX_SYS,CSR.ESTAT.Ecode=11)</p>
+</li>
+<li>
+<p>地址错误例外    (EX_ADE,CSR.ESTAT.Ecode=8) 例如地址没有对齐</p>
+</li>
+</ul>
+<p>LoongArch32架构的处理器也提供了两个例外入口。分别是常规例外与TLB例外。由于TLB例外涉及重填页表的工作，因此必须为物理地址。而常规例外入口则可以根据目前处理器的运行状态选择使用虚拟地址或物理地址。这两个例外入口也存储在CSR寄存器中，名称分别为CSR.EBASE与CSR.RFBASE。uCore对于CSR.RFBASE的处理采用了两层跳转的方式，本次实验我们暂时不考虑RFBASE的处理过程。</p>
+<h4 id="_5">时钟中断<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>LoongArch32的CSR提供了一个时钟定时器，操作系统可以通过CSR指令配置该定时器，从而实现硬件产生时钟中断，使得操作系统能够进行分时调度。</p>
+<p>这一部分大家请参考<a href="https://mirrors.tuna.tsinghua.edu.cn/loongson/docs/loongarch/%E9%BE%99%E8%8A%AF%E6%9E%B6%E6%9E%8432%E4%BD%8D%E7%B2%BE%E7%AE%80%E7%89%88%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_v1.02.pdf">龙芯架构32位精简版参考手册_v1.02.pdf</a>的 <strong>7.6定时器相关控制状态寄存器</strong> ，以及 <strong>7.4.5例外状态（ESTAT）</strong> 的介绍。</p>
+<h4 id="_6">串口中断<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>我们的QEMU以及Chiplab SoC上都有一个NS16550a兼容的串口控制器，该控制器在很多种情况下都会有中断产生（大家可以自行查阅ns16550有关资料），在本实验中我们暂时只需要知道，串口有输入时会产生中断。</p>
+<p>在LoongArch32的QEMU以及Chiplab SoC上，串口连接的中断为HWI[0]。</p>
+<h4 id="_7">例外产生<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p>当例外产生时，处理器 <strong>硬件</strong>  会进行如下操作（这些操作由硬件完成，不会出现在操作系统代码中）：</p>
+<ul>
+<li>
+<p>将CSR.CRMD的PLV、IE分别存到CSR.PRMD的PPLV和IE中，然后将CSR.CRMD的PLV置为0，IE置为0。</p>
+</li>
+<li>
+<p>将触发例外指令的PC值记录到CSR.ERA中</p>
+</li>
+<li>
+<p>跳转到例外入口处取值。（如果是TLB相关例外跳转到CSR.RFBASE，否则为CSR.EBASE）</p>
+</li>
+</ul>
+<p>然后将PC跳转到对应的例外入口地址处，交给软件完成例外的处理操作。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>更加详细的信息请同学们自行阅读<a href="https://mirrors.tuna.tsinghua.edu.cn/loongson/docs/loongarch/%E9%BE%99%E8%8A%AF%E6%9E%B6%E6%9E%8432%E4%BD%8D%E7%B2%BE%E7%AE%80%E7%89%88%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_v1.02.pdf">龙芯架构32位精简版参考手册_v1.02.pdf</a>。关于中断产生过程，可以阅读该文档的6.1.4部分。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>小思考：为什么进入异常处理时要关闭中断？</p>
+<p>这里给出参考答案：</p>
+<p>若不关闭，考虑以下两种情况：</p>
+<ol>
+<li>
+<p>异常类型是中断</p>
+<p>处理器由于中断异常跳转到了异常入口点，此时中断信号还没有响应使其清除，处理器继续满足中断产生条件，则继续跳转中断入口点，会导致死循环。</p>
+</li>
+<li>
+<p>异常类型不是中断</p>
+<p>若在异常处理时发生中断（例如外设有数据到达、定时器产生时钟中断等情况），会导致异常上下文被破坏，从而导致上一个异常应该保存的状态还没存下来，下一个异常继续产生，从而无法恢复原来的现场。</p>
+<p>（同学们可以思考uCore中的trapframe保存时再次出现一个中断会出现什么情况？）</p>
+</li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>小思考：为什么TLB重填异常采用了关闭映射地址翻译模式，采用直接地址翻译模式的设计？</p>
+<p>同学们可以做完Lab2后尝试回答此问题。</p>
+<p>该问题有多个角度，同学们可以考虑分解后的以下子问题：</p>
+<ol>
+<li>如果内存超过512M，且页表会放在物理内存任意位置，DMW方案还是否可行？</li>
+<li>
+<p>TLB Miss相对于页无效/页修改是频率高得多的事件，如果希望TLB Miss时OS能够尽快完成TLB重填，应该如何改写uCore代码？</p>
+<p>同学们可以尝试阅读Linux中对于同样是软件控制TLB的MIPS架构的代码。</p>
+</li>
+</ol>
+</div>
+<h4 id="_8">操作系统响应异常<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>对于uCore，CSR.EBASE在内核初始化阶段（位于<code>kern/init/init.c</code>的<code>setup_exception_vector</code>函数）会被初始化为<code>exception_handler</code>符号对应的指针（位于<code>kern/trap/exceptions.S</code>）。</p>
+<p>在<code>kern/trap/exceptions.S</code>中，会完成以下操作：</p>
+<ul>
+<li>
+<p>将t0、t1保存到CSR的KS0、KS1中，以便我们可以使用这两个GPR来存储一些数据而不必破坏例外现场。</p>
+</li>
+<li>
+<p>判断异常是否发生在用户态，若是，切换栈为内核栈。</p>
+</li>
+<li>
+<p>在栈上开辟足够存储<code>trapframe</code>数据结构的空间（位于<code>kern/trap/loongarch_trapframe.h</code>），将异常发生现场按照trapframe结构保存在栈中。</p>
+<p>注：其中的pushreg结构只保存30个GPR寄存器，而不是32个。</p>
+<p>这是因为0号寄存器横为0不可写，因此不需要保存，1号寄存器在ABI中意义是RA，已经保存在了trapframe中的tf_ra。</p>
+<p>需要注意的是，ra寄存器与CSR.ERA意义不同。ra寄存器在ABI上存储的是程序运行中函数return的返回地址，而CSR.ERA存储的是例外产生时还没提交的PC地址。</p>
+</li>
+<li>
+<p>数据保存后，将a0寄存器保存为指向trapframe的指针</p>
+<p>根据ABI定义，a0保存的是函数调用的第一个参数，这样C语言编写的loongarch_trap函数读取该参数即读取a0的值。</p>
+</li>
+<li>
+<p>跳转到loongarch_trap函数</p>
+</li>
+</ul>
+<p>之后的C语言代码编写的部分不详细展开，请同学们自行阅读代码。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>小思考：为什么需要切换为内核栈？直接让内核跑在用户程序的栈上是否可行？</p>
+<p>考虑以下角度：
+1. 内核栈泄露给用户程序是否导致安全问题？
+2. 用户程序跑在虚拟地址，读写用户栈可能会产生什么问题？（可以做完后续Lab后再思考该子问题）</p>
+</div>
+<h4 id="_9">例外处理返回<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>当loongarch_trap函数结束后，由于我们跳转时写了ra寄存器，此时会回到跳转前的位置。</p>
+<p>该位置也就是<code>kern/trap/exception.S</code>的jirl到loongarch_trap的下一条指令，对应的是exception_return符号的开始。</p>
+<p>在这里，我们将之前保存的trapframe中的信息从栈上还原，然后调用ertn指令，该指令会完成如下操作：</p>
+<ul>
+<li>
+<p>将CSR.PRMD中的PPLV、PIE值回复到CSR.CRMD的PLV、IE中。</p>
+</li>
+<li>
+<p>跳转到CSR.ERA所记录的地址处取指。</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>小思考：我们在loongarch_trap函数中继续调用了trap_dispatch，此时是否会改变ra寄存器的值？如果改变了，原本的ra会被存储在什么位置？</p>
+<p>同学们可以回忆程序运行时的栈是做什么用的，以及阅读LoongArch32的ABI文档以及其他架构的ABI文档。</p>
+</div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年5月14日</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../getcode/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 获取实验资料" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              获取实验资料
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../code/" class="md-footer__link md-footer__link--next" aria-label="Next: 代码讲解" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              代码讲解
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 College of Computer Science, Chongqing University.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      
+    
+  </body>
+</html>
